@@ -8,155 +8,139 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
 <meta name="apple-mobile-web-app-title" content="Départ Train">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#000000">
+<meta name="theme-color" content="#1c1c1e">
 <title>Checklist Départ Train — FRET</title>
 <style>
-:root {
-  --bg: #000000;
-  --g1: rgba(255,255,255,0.08);
-  --g2: rgba(255,255,255,0.05);
-  --g-border: rgba(255,255,255,0.14);
-  --g-shadow: 0 4px 24px rgba(0,0,0,0.5);
-  --green: #30d158;
-  --amber: #ff9f0a;
-  --red:   #ff453a;
-  --blue:  #0a84ff;
-  --teal:  #5ac8fa;
-  --purple:#bf5af2;
-  --pink:  #ff375f;
-  --indigo:#5e5ce6;
-  --text:  #ffffff;
-  --text2: rgba(255,255,255,0.6);
-  --text3: rgba(255,255,255,0.35);
-  --mono: ui-monospace,'SF Mono',SFMono-Regular,Menlo,monospace;
-  --sans: -apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
+:root{
+  --green:#30d158;--amber:#ff9f0a;--red:#ff453a;--teal:#5ac8fa;
+  --mono:ui-monospace,'SF Mono',Menlo,monospace;
+  --sans:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
 }
 
-*{box-sizing:border-box;margin:0;padding:0;}
-html{background:#000000;}
+/* ══ FOND ABSOLU — ne peut PAS devenir blanc ══ */
+html{
+background-color:#1c1c1e !important;
+background-image:none !important;
+min-height:100%;
+}
 body{
-background:#000000;
-color:var(–text);
+background-color:#1c1c1e !important;
+background-image:none !important;
 font-family:var(–sans);
-min-height:100vh;
+color:#fff;
 min-height:100dvh;
-padding:0 0 calc(80px + env(safe-area-inset-bottom));
+padding:0 0 calc(84px + env(safe-area-inset-bottom));
 }
 
-/* ── HEADER ── */
+/* ══ HEADER ══ */
 header{
-background:#111111;
-border-bottom:1px solid rgba(255,255,255,0.12);
-padding:12px 16px 12px calc(16px + env(safe-area-inset-left));
+background:#1c1c1e;
+border-bottom:1px solid rgba(255,255,255,0.1);
+padding:13px 18px;
 display:flex;align-items:center;justify-content:space-between;
 position:sticky;top:0;z-index:100;
 }
-.logo-badge{
-background:var(–green);color:#000;
-font-family:var(–mono);font-weight:900;font-size:10px;
-letter-spacing:2px;padding:3px 8px;border-radius:5px;
-}
-header h1{font-weight:700;font-size:15px;letter-spacing:0.5px;text-transform:uppercase;margin-left:10px;}
-.clock{font-family:var(–mono);font-size:17px;color:var(–green);letter-spacing:1px;}
+.logo-badge{background:var(–green);color:#000;font-family:var(–mono);font-weight:900;font-size:10px;letter-spacing:2px;padding:3px 8px;border-radius:6px;}
+header h1{font-weight:700;font-size:14px;letter-spacing:1px;text-transform:uppercase;color:#fff;margin-left:10px;}
+.clock{font-family:var(–mono);font-size:16px;color:var(–green);letter-spacing:1px;}
 
-/* ── TRAIN INFO ── */
-.train-info{
-background:#111111;
-border-bottom:1px solid rgba(255,255,255,0.1);
-padding:10px 16px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;
-}
-.info-field{display:flex;align-items:center;gap:6px;}
-.info-label{font-family:var(–mono);font-size:9px;color:var(–text3);text-transform:uppercase;letter-spacing:1px;}
-.info-input{
-background:#222222;
-border:1px solid rgba(255,255,255,0.2);
-color:var(–amber);font-family:var(–mono);font-size:13px;
-padding:4px 8px;border-radius:8px;width:82px;text-align:center;outline:none;
-}
-.info-input:focus{border-color:var(–amber);background:#2a1d00;}
-.info-input.wide{width:126px;}
-.info-input::placeholder{color:rgba(255,255,255,0.25);}
-
-/* ── CHRONO ── */
+/* ══ CHRONO — fond transparent avec blur ══ */
 .chrono-bar{
-background:#111111;
-border-bottom:1px solid rgba(255,255,255,0.1);
-padding:8px 16px;display:flex;align-items:center;gap:10px;
+margin:12px 16px 0;
+border-radius:16px;
+padding:10px 14px;
+display:flex;align-items:center;gap:10px;
+/* Transparent avec flou ~15% */
+background:rgba(255,255,255,0.05);
+-webkit-backdrop-filter:blur(15px);
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,0.14);
+box-shadow:
+inset 0 1px 0 rgba(255,255,255,0.18),
+0 4px 20px rgba(0,0,0,0.4);
 }
-.chrono-label{font-family:var(–mono);font-size:9px;color:var(–text3);text-transform:uppercase;letter-spacing:1px;flex-shrink:0;}
-.chrono-display{font-family:var(–mono);font-size:20px;letter-spacing:2px;min-width:62px;text-align:center;}
-.chrono-display.idle {color:var(–text3);}
-.chrono-display.run  {color:var(–amber);}
-.chrono-display.done {color:var(–green);}
-@keyframes blink{50%{opacity:.2;}}
+.chrono-label{font-family:var(–mono);font-size:9px;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:1px;flex-shrink:0;}
+.chrono-display{font-family:var(–mono);font-size:21px;letter-spacing:2px;min-width:62px;text-align:center;font-weight:600;}
+.chrono-display.idle{color:rgba(255,255,255,0.35);}
+.chrono-display.run {color:var(–amber);}
+.chrono-display.done{color:var(–green);}
 .chrono-prog{flex:1;}
-.chrono-bg{background:rgba(255,255,255,0.12);border-radius:3px;height:3px;overflow:hidden;}
+.chrono-bg{background:rgba(255,255,255,0.1);border-radius:3px;height:3px;overflow:hidden;}
 .chrono-fill{height:100%;border-radius:3px;transition:width .5s linear,background .3s;}
 .chrono-btns{display:flex;gap:6px;flex-shrink:0;}
+
+/* Boutons START/SET/RST — transparents blur */
 .cbtn{
-font-family:var(–mono);font-size:11px;font-weight:600;
-padding:6px 11px;border-radius:8px;border:none;cursor:pointer;
+font-family:var(–mono);font-size:11px;font-weight:700;
+padding:7px 12px;border-radius:10px;cursor:pointer;
 -webkit-tap-highlight-color:transparent;
-backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+background:rgba(255,255,255,0.07);
+-webkit-backdrop-filter:blur(15px);backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,0.18);
+box-shadow:inset 0 1px 0 rgba(255,255,255,0.22),0 2px 8px rgba(0,0,0,0.35);
+color:#fff;
 }
-.cbtn-start{background:rgba(255,159,10,0.25);color:var(–amber);border:1px solid rgba(255,159,10,0.5);}
-.cbtn-start.running{background:rgba(255,69,58,0.25);color:var(–red);border-color:rgba(255,69,58,0.5);}
-.cbtn-set  {background:rgba(10,132,255,0.2); color:var(–blue); border:1px solid rgba(10,132,255,0.4);}
-.cbtn-rst  {background:rgba(255,255,255,0.1);color:var(–text2);border:1px solid var(–g-border);}
+.cbtn-start{color:#ffcc66;border-color:rgba(255,159,10,0.35);}
+.cbtn-start.running{color:#ff9090;border-color:rgba(255,69,58,0.35);}
+.cbtn-set{color:#66aaff;border-color:rgba(10,132,255,0.35);}
+.cbtn-rst{color:rgba(255,255,255,0.6);}
 
-/* ── PROGRESS ── */
+/* ══ PROGRESS ══ */
 .progress-wrap{padding:12px 16px 6px;}
-.progress-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;}
-.progress-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(–text3);}
-.progress-count{font-family:var(–mono);font-size:13px;color:var(–green);}
+.progress-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;}
+.progress-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.38);}
+.progress-count{font-family:var(–mono);font-size:13px;color:var(–green);font-weight:600;}
 .progress-bar-bg{background:rgba(255,255,255,0.1);border-radius:3px;height:4px;overflow:hidden;}
-.progress-bar-fill{height:100%;background:linear-gradient(90deg,#30d158,#34c759);border-radius:3px;transition:width .4s cubic-bezier(.4,0,.2,1);}
+.progress-bar-fill{height:100%;background:linear-gradient(90deg,#30d158,#34c759);border-radius:3px;transition:width .4s ease;}
 
-/* ── MINUTE BANNER ── */
+/* ══ MINUTE BANNER ══ */
 .minute-banner{
-margin:10px 16px 0;
-background:rgba(255,159,10,0.1);
-backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
-border:1px solid rgba(255,159,10,0.3);
-border-left:3px solid var(–amber);
-border-radius:12px;padding:10px 13px;
+margin:8px 16px 0;border-radius:14px;padding:10px 14px;
 display:flex;gap:9px;align-items:flex-start;
+background:rgba(255,159,10,0.1);
+-webkit-backdrop-filter:blur(15px);backdrop-filter:blur(15px);
+border:1px solid rgba(255,159,10,0.25);border-left:3px solid var(–amber);
+box-shadow:inset 0 1px 0 rgba(255,255,255,0.12),0 4px 16px rgba(0,0,0,0.3);
 }
-.minute-icon{font-size:16px;flex-shrink:0;margin-top:1px;}
-.minute-text strong{font-weight:700;font-size:12px;color:var(–amber);display:block;margin-bottom:2px;}
-.minute-text span{font-size:11px;color:var(–text2);line-height:1.4;}
+.minute-icon{font-size:15px;flex-shrink:0;margin-top:2px;}
+.minute-text strong{font-weight:700;font-size:12px;color:#ffcc66;display:block;margin-bottom:2px;}
+.minute-text span{font-size:11px;color:rgba(255,255,255,0.6);line-height:1.4;}
 
-/* ── SECTIONS ── */
-.section{margin:10px 16px 0;border-radius:14px;overflow:hidden;}
+/* ══ SECTIONS ══
+Dégradé d’une seule teinte bleue du + foncé (PS) au + clair (HD)
+opacité ~20%, blur 15px, ombre blanche interne ══ */
+.section{margin:10px 16px 0;border-radius:16px;overflow:hidden;}
 
 .section-header{
 display:flex;align-items:center;justify-content:space-between;
-padding:11px 14px;cursor:pointer;user-select:none;
-backdrop-filter:blur(20px) saturate(180%);
--webkit-backdrop-filter:blur(20px) saturate(180%);
-border-radius:14px;
-border:1px solid var(–g-border);
-box-shadow:var(–g-shadow);
+padding:13px 16px;cursor:pointer;user-select:none;
+border-radius:16px;
+-webkit-backdrop-filter:blur(15px);backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,0.14);
+box-shadow:inset 0 1px 0 rgba(255,255,255,0.22),0 6px 24px rgba(0,0,0,0.4);
 transition:filter .15s;
 }
-.section:not(.collapsed) .section-header{border-radius:14px 14px 0 0;}
+.section:not(.collapsed) .section-header{border-radius:16px 16px 0 0;border-bottom-color:rgba(255,255,255,0.07);}
 .section-header:active{filter:brightness(1.2);}
 
-/* Couleurs solides foncées — indépendantes du fond */
-.sec-ps    .section-header{background:#2d1f00;border:1px solid rgba(255,159,10,0.5);}
-.sec-prep  .section-header{background:#001428;border:1px solid rgba(10,132,255,0.5);}
-.sec-brief .section-header{background:#002010;border:1px solid rgba(48,209,88,0.5);}
-.sec-bf    .section-header{background:#1a0a2e;border:1px solid rgba(191,90,242,0.5);}
-.sec-ppe-b .section-header{background:#001a08;border:1px solid rgba(52,199,89,0.5);}
-.sec-ppe-s .section-header{background:#001e28;border:1px solid rgba(90,200,250,0.5);}
-.sec-par   .section-header{background:#0a0a28;border:1px solid rgba(94,92,230,0.5);}
-.sec-aum   .section-header{background:#280010;border:1px solid rgba(255,55,95,0.5);}
-.sec-hd    .section-header{background:#280000;border:1px solid rgba(255,69,58,0.5);}
+/* Dégradé bleu — 9 niveaux du + foncé au + clair */
+.sec-ps    .section-header{background:rgba(30, 80,180,0.28);}
+.sec-prep  .section-header{background:rgba(30, 90,185,0.25);}
+.sec-brief .section-header{background:rgba(30,105,195,0.22);}
+.sec-bf    .section-header{background:rgba(30,120,200,0.20);}
+.sec-ppe-b .section-header{background:rgba(30,135,210,0.19);}
+.sec-ppe-s .section-header{background:rgba(30,150,215,0.18);}
+.sec-par   .section-header{background:rgba(30,165,220,0.17);}
+.sec-aum   .section-header{background:rgba(30,180,228,0.16);}
+.sec-hd    .section-header{background:rgba(30,195,235,0.15);}
 
+/* Corps de section */
 .section-body{
-background:#111111;
-border:1px solid rgba(255,255,255,0.1);border-top:none;
-border-radius:0 0 14px 14px;
+background:rgba(255,255,255,0.04);
+-webkit-backdrop-filter:blur(15px);backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,0.1);
+border-top:none;border-radius:0 0 16px 16px;
+box-shadow:0 8px 24px rgba(0,0,0,0.35);
 }
 .section.collapsed .section-body{display:none;}
 
@@ -164,233 +148,131 @@ border-radius:0 0 14px 14px;
 .section-badge{
 font-family:var(–mono);font-size:9px;font-weight:700;
 padding:3px 7px;border-radius:6px;letter-spacing:0.5px;white-space:nowrap;
-backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+background:rgba(0,0,0,0.28);border:1px solid rgba(255,255,255,0.22);color:#fff;
 }
-.sec-ps    .section-badge{background:rgba(255,159,10,0.3); color:#ff9f0a;border:1px solid rgba(255,159,10,0.5);}
-.sec-prep  .section-badge{background:rgba(10,132,255,0.3); color:#0a84ff;border:1px solid rgba(10,132,255,0.5);}
-.sec-brief .section-badge{background:rgba(48,209,88,0.3);  color:#30d158;border:1px solid rgba(48,209,88,0.5);}
-.sec-bf    .section-badge{background:rgba(191,90,242,0.3); color:#bf5af2;border:1px solid rgba(191,90,242,0.5);}
-.sec-ppe-b .section-badge{background:rgba(52,199,89,0.3);  color:#34c759;border:1px solid rgba(52,199,89,0.5);}
-.sec-ppe-s .section-badge{background:rgba(90,200,250,0.3); color:#5ac8fa;border:1px solid rgba(90,200,250,0.5);}
-.sec-par   .section-badge{background:rgba(94,92,230,0.3);  color:#5e5ce6;border:1px solid rgba(94,92,230,0.5);}
-.sec-aum   .section-badge{background:rgba(255,55,95,0.3);  color:#ff375f;border:1px solid rgba(255,55,95,0.5);}
-.sec-hd    .section-badge{background:rgba(255,69,58,0.3);  color:#ff453a;border:1px solid rgba(255,69,58,0.5);}
-
-.section-title{font-weight:700;font-size:13px;letter-spacing:0.3px;text-transform:uppercase;color:#fff;}
+.section-title{font-weight:700;font-size:14px;letter-spacing:0.3px;text-transform:uppercase;color:#fff;}
 .section-meta{display:flex;align-items:center;gap:8px;flex-shrink:0;}
-.section-progress{font-family:var(–mono);font-size:11px;color:rgba(255,255,255,0.5);}
-.chevron{color:rgba(255,255,255,0.45);font-size:10px;transition:transform .2s;}
+.section-progress{font-family:var(–mono);font-size:11px;color:rgba(255,255,255,0.65);font-weight:600;}
+.chevron{color:rgba(255,255,255,0.6);font-size:10px;transition:transform .2s;}
 .section.collapsed .chevron{transform:rotate(-90deg);}
 
-/* ── MASTER ITEM ── */
-.master-item{
-display:flex;align-items:flex-start;gap:12px;
-padding:12px 14px;cursor:pointer;
--webkit-tap-highlight-color:transparent;
-border-bottom:1px solid rgba(255,255,255,0.07);
-}
-.master-item:active{background:rgba(255,255,255,0.05);}
-.master-item.checked{opacity:.4;}
-.master-item.checked .master-label{text-decoration:line-through;}
-.master-item .checkbox{
-width:26px;height:26px;border-radius:8px;flex-shrink:0;
-border:2px solid rgba(255,159,10,0.7);
-background:#1a1200;
-display:flex;align-items:center;justify-content:center;
-transition:all .15s;margin-top:1px;
-}
+/* ══ MASTER ITEM ══ */
+.master-item{display:flex;align-items:flex-start;gap:12px;padding:13px 16px;cursor:pointer;-webkit-tap-highlight-color:transparent;border-bottom:1px solid rgba(255,255,255,0.07);}
+.master-item:active{background:rgba(255,255,255,0.04);}
+.master-item.checked{opacity:.42;}
+.master-item.checked .master-label{text-decoration:line-through;color:rgba(255,255,255,0.35);}
+.master-item .checkbox{width:26px;height:26px;border-radius:8px;flex-shrink:0;border:1.5px solid rgba(255,159,10,0.7);background:rgba(255,159,10,0.1);display:flex;align-items:center;justify-content:center;transition:all .15s;margin-top:1px;}
 .master-item.checked .checkbox{background:var(–green);border-color:var(–green);}
-.master-item .checkmark{display:none;color:#000;font-size:15px;font-weight:900;}
+.master-item .checkmark,.checkmark{display:none;color:#000;font-size:15px;font-weight:900;}
 .master-item.checked .checkmark{display:block;}
-.master-label{font-size:14px;font-weight:600;flex:1;line-height:1.3;color:#fff;}
-.master-hint{font-size:11px;color:var(–text2);margin-top:2px;line-height:1.4;}
+.master-label{font-size:15px;font-weight:600;flex:1;line-height:1.3;color:#fff;}
+.master-hint{font-size:11px;color:rgba(255,255,255,0.5);margin-top:2px;line-height:1.4;}
 
-/* ── SUBMENU TOGGLE ── */
-.submenu-toggle{
-padding:7px 14px;display:flex;align-items:center;gap:6px;
-cursor:pointer;user-select:none;
-font-family:var(–mono);font-size:10px;color:var(–teal);
-letter-spacing:1px;text-transform:uppercase;
-border-bottom:1px solid rgba(255,255,255,0.07);
--webkit-tap-highlight-color:transparent;
-}
-.submenu-toggle:active{background:rgba(255,255,255,0.05);}
+/* ══ SUBMENU ══ */
+.submenu-toggle{padding:8px 16px;display:flex;align-items:center;gap:6px;cursor:pointer;font-family:var(–mono);font-size:10px;color:var(–teal);font-weight:600;letter-spacing:1px;text-transform:uppercase;border-bottom:1px solid rgba(255,255,255,0.07);-webkit-tap-highlight-color:transparent;}
+.submenu-toggle:active{background:rgba(255,255,255,0.04);}
 .submenu-arrow{transition:transform .2s;font-size:9px;}
 .submenu-open .submenu-arrow{transform:rotate(90deg);}
-.submenu{display:none;background:#0a0a0a;}
+.submenu{display:none;background:rgba(0,0,0,0.15);}
 
-/* ── SUB-GROUP ── */
-.sub-group-label{
-padding:6px 14px 4px;
-font-family:var(–mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;
-color:var(–text3);background:#1a1a1a;
-border-bottom:1px solid rgba(255,255,255,0.07);
-}
+/* ══ SUB-GROUP ══ */
+.sub-group-label{padding:7px 16px 4px;font-family:var(–mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,0.35);background:rgba(255,255,255,0.03);border-bottom:1px solid rgba(255,255,255,0.07);}
 
-/* ── ITEMS ── */
-.check-item{
-display:flex;align-items:flex-start;gap:12px;
-padding:11px 14px;border-bottom:1px solid rgba(255,255,255,0.07);
-cursor:pointer;-webkit-tap-highlight-color:transparent;
-}
+/* ══ ITEMS ══ */
+.check-item{display:flex;align-items:flex-start;gap:12px;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.07);cursor:pointer;-webkit-tap-highlight-color:transparent;}
 .check-item:last-child{border-bottom:none;}
-.check-item:active{background:#1a1a1a;}
-.check-item.checked{opacity:.38;}
+.check-item:active{background:rgba(255,255,255,0.04);}
+.check-item.checked{opacity:.35;}
 .check-item.checked .item-label{text-decoration:line-through;color:rgba(255,255,255,0.3);}
-.checkbox{
-width:26px;height:26px;border-radius:8px;flex-shrink:0;
-border:2px solid rgba(255,255,255,0.3);
-background:#1e1e1e;
-display:flex;align-items:center;justify-content:center;
-transition:all .15s;margin-top:1px;
-}
+.checkbox{width:26px;height:26px;border-radius:8px;flex-shrink:0;border:1.5px solid rgba(255,255,255,0.32);background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;transition:all .15s;margin-top:1px;}
 .check-item.checked .checkbox{background:var(–green);border-color:var(–green);}
-.checkmark{display:none;color:#000;font-size:15px;font-weight:900;line-height:1;}
 .check-item.checked .checkmark{display:block;}
 .item-content{flex:1;}
 .item-label{font-size:14px;font-weight:500;line-height:1.3;color:#fff;}
-.item-detail{font-size:11px;color:var(–text2);margin-top:3px;line-height:1.4;}
-.item-tag{
-display:inline-block;font-family:var(–mono);font-size:8px;
-letter-spacing:0.5px;padding:2px 6px;border-radius:5px;
-margin-top:4px;text-transform:uppercase;font-weight:700;
-}
-.tag-oblig{background:rgba(255,69,58,0.2); color:#ff6b63;border:1px solid rgba(255,69,58,0.4);}
-.tag-cond {background:rgba(255,159,10,0.15);color:#ffb340;border:1px solid rgba(255,159,10,0.35);}
-.formula{
-display:inline-block;font-family:var(–mono);font-size:13px;font-weight:700;
-background:rgba(48,209,88,0.15);color:var(–green);
-border:1px solid rgba(48,209,88,0.4);
-padding:2px 10px;border-radius:7px;margin-top:4px;
-}
+.item-detail{font-size:11px;color:rgba(255,255,255,0.52);margin-top:3px;line-height:1.45;}
+.item-tag{display:inline-block;font-family:var(–mono);font-size:8px;letter-spacing:0.5px;padding:2px 7px;border-radius:5px;margin-top:5px;text-transform:uppercase;font-weight:700;}
+.tag-oblig{background:rgba(255,69,58,0.16);color:#ff9090;border:1px solid rgba(255,69,58,0.35);}
+.tag-cond {background:rgba(255,159,10,0.14);color:#ffcc66;border:1px solid rgba(255,159,10,0.35);}
+.formula{display:inline-block;font-family:var(–mono);font-size:14px;font-weight:700;background:rgba(48,209,88,0.14);color:#66ff99;border:1px solid rgba(48,209,88,0.35);padding:3px 12px;border-radius:8px;margin-top:5px;}
 
-/* ── NOTE ── */
-.section-note{
-padding:8px 14px;
-background:rgba(255,159,10,0.06);
-border-top:1px solid rgba(255,255,255,0.07);
-font-size:11px;color:var(–text2);line-height:1.5;
-}
-.section-note .warn{color:var(–amber);font-weight:600;}
+/* ══ NOTE ══ */
+.section-note{padding:9px 16px;background:rgba(255,159,10,0.05);border-top:1px solid rgba(255,255,255,0.06);font-size:11px;color:rgba(255,255,255,0.55);line-height:1.5;}
+.section-note .warn{color:#ffcc66;font-weight:600;}
 
-/* ── BOTTOM BAR ── */
+/* ══ BOTTOM BAR ══ */
 .bottom-bar{
 position:fixed;bottom:0;left:0;right:0;
-background:#111111;
-border-top:1px solid rgba(255,255,255,0.12);
+background:rgba(28,28,30,0.85);
+-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);
+border-top:1px solid rgba(255,255,255,0.1);
 padding:10px 16px calc(10px + env(safe-area-inset-bottom));
 display:flex;gap:10px;z-index:100;
 }
 .btn{
-flex:1;padding:13px;border:none;border-radius:12px;
-font-family:var(–sans);font-weight:700;font-size:12px;
-letter-spacing:0.5px;text-transform:uppercase;
+flex:1;padding:14px;border-radius:14px;
+font-family:var(–sans);font-weight:700;font-size:13px;
+letter-spacing:0.3px;text-transform:uppercase;
 cursor:pointer;-webkit-tap-highlight-color:transparent;
-backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+background:rgba(255,255,255,0.07);
+-webkit-backdrop-filter:blur(15px);backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,0.16);
+box-shadow:inset 0 1px 0 rgba(255,255,255,0.2),0 4px 16px rgba(0,0,0,0.35);
+color:#fff;
 }
-.btn-reset{background:rgba(255,255,255,0.1);color:var(–text2);border:1px solid var(–g-border);}
-.btn-reset:active{background:rgba(255,255,255,0.18);}
-.btn-ok   {background:var(–green);color:#000;flex:2;font-size:13px;box-shadow:0 0 20px rgba(48,209,88,0.3);}
-.btn-ok:active{filter:brightness(0.9);}
-.btn-warn {background:rgba(255,159,10,0.2);color:var(–amber);border:1px solid rgba(255,159,10,0.45);flex:2;}
-.btn-warn:active{background:rgba(255,159,10,0.32);}
-.btn-block{background:rgba(255,69,58,0.2);color:var(–red);border:1px solid rgba(255,69,58,0.45);flex:2;}
-.btn-block:active{background:rgba(255,69,58,0.32);}
+.btn-reset{color:rgba(255,255,255,0.7);}
+.btn-ok   {background:rgba(48,209,88,0.22);color:#66ff99;border-color:rgba(48,209,88,0.35);flex:2;}
+.btn-warn {background:rgba(255,159,10,0.2);color:#ffcc66;border-color:rgba(255,159,10,0.35);flex:2;}
+.btn-block{background:rgba(255,69,58,0.2);color:#ff9090;border-color:rgba(255,69,58,0.35);flex:2;}
 
-/* ── MODAL ── */
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);z-index:200;align-items:flex-end;justify-content:center;}
+/* ══ MODAL ══ */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);z-index:200;align-items:flex-end;justify-content:center;}
 .modal-overlay.active{display:flex;}
 .modal{
 background:#1c1c1e;
-border:1px solid rgba(255,255,255,0.15);
-border-bottom:none;border-radius:20px 20px 0 0;
-padding:20px 18px calc(28px + env(safe-area-inset-bottom));
-width:100%;max-width:520px;max-height:88vh;overflow-y:auto;
-box-shadow:0 -10px 60px rgba(0,0,0,0.8);
-animation:slideUp .25s cubic-bezier(.32,0,.67,0);
-}
-.modal.m-warn {border-color:rgba(255,159,10,0.4);}
-.modal.m-block{border-color:rgba(255,69,58,0.4);}
-@keyframes slideUp{from{transform:translateY(60px);opacity:0;}to{transform:translateY(0);opacity:1;}}
-
-.modal-handle{width:36px;height:4px;background:rgba(255,255,255,0.3);border-radius:2px;margin:0 auto 16px;}
-.modal h2{font-size:18px;font-weight:800;text-align:center;margin-bottom:3px;}
-.modal h2.ok   {color:var(–green);}
-.modal h2.warn {color:var(–amber);}
-.modal h2.block{color:var(–red);}
-.modal-sub{font-family:var(–mono);font-size:11px;color:var(–text2);text-align:center;margin-bottom:16px;}
-
-.modal-traininfo{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
-.mti{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:7px 11px;flex:1;min-width:70px;}
-.mti .l{font-family:var(–mono);font-size:9px;color:var(–text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:2px;}
-.mti .v{font-family:var(–mono);font-size:14px;color:var(–amber);}
-
-.blockers{margin-bottom:12px;}
-.blocker-item{
-display:flex;align-items:flex-start;gap:8px;
-padding:9px 12px;
-background:rgba(255,69,58,0.12);
-border:1px solid rgba(255,69,58,0.3);
-border-radius:10px;margin-bottom:6px;
-}
-.blocker-icon{font-size:14px;flex-shrink:0;}
-.blocker-text{font-size:13px;font-weight:600;color:#ff6b63;line-height:1.3;}
-
-.modal-recap{margin-bottom:14px;}
-.recap-row{
-display:flex;align-items:center;gap:10px;
-padding:8px 12px;border-radius:10px;margin-bottom:5px;
-}
-.r-done  {background:rgba(48,209,88,0.1); border:1px solid rgba(48,209,88,0.25);}
-.r-warn  {background:rgba(255,159,10,0.1);border:1px solid rgba(255,159,10,0.25);}
-.r-block {background:rgba(255,69,58,0.1); border:1px solid rgba(255,69,58,0.3);}
-.recap-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-.r-done  .recap-dot{background:var(–green);}
-.r-warn  .recap-dot{background:var(–amber);}
-.r-block .recap-dot{background:var(–red);}
-.recap-name {font-size:12px;font-weight:700;flex:1;text-transform:uppercase;letter-spacing:0.5px;}
-.recap-score{font-family:var(–mono);font-size:11px;color:var(–text2);}
-.r-done .recap-score{color:var(–green);}
-.r-block .recap-score{color:var(–red);}
-
-.modal-close{
-display:block;width:100%;padding:14px;
-background:rgba(255,255,255,0.1);color:var(–text);
-border:1px solid rgba(255,255,255,0.15);border-radius:12px;
-font-size:14px;font-weight:600;cursor:pointer;text-align:center;
-margin-top:6px;
-}
-.modal-close:active{background:rgba(255,255,255,0.18);}
-.modal-close.danger{background:rgba(255,69,58,0.15);color:var(–red);border-color:rgba(255,69,58,0.35);}
-.modal-close.danger:active{background:rgba(255,69,58,0.28);}
-
-/* ── CHRONO SET MODAL ── */
-.chrono-set-modal{
-background:#1c1c1e;
 border:1px solid rgba(255,255,255,0.15);border-bottom:none;
-border-radius:20px 20px 0 0;
-padding:20px 18px calc(28px + env(safe-area-inset-bottom));
-width:100%;max-width:360px;
-animation:slideUp .25s cubic-bezier(.32,0,.67,0);
+border-radius:22px 22px 0 0;padding:20px 18px calc(28px + env(safe-area-inset-bottom));
+width:100%;max-width:520px;max-height:88vh;overflow-y:auto;
+box-shadow:inset 0 1px 0 rgba(255,255,255,0.18),0 -12px 60px rgba(0,0,0,0.6);
+animation:slideUp .25s ease;
 }
-.chrono-set-modal h3{font-size:16px;font-weight:800;color:var(–teal);margin-bottom:18px;text-align:center;}
-.dur-custom-row{display:flex;align-items:center;gap:10px;margin-bottom:18px;justify-content:center;}
-.dur-custom-label{font-family:var(–mono);font-size:11px;color:var(–text2);}
-.dur-custom-input{
-background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.25);
-color:var(–amber);font-family:var(–mono);font-size:26px;
-padding:8px 12px;border-radius:10px;width:80px;text-align:center;outline:none;
-}
-.dur-custom-input:focus{border-color:var(–amber);}
-.dur-unit{font-family:var(–mono);font-size:13px;color:var(–text2);}
-.dur-apply{
-width:100%;padding:14px;
-background:var(–teal);color:#000;border:none;border-radius:12px;
-font-size:15px;font-weight:800;cursor:pointer;letter-spacing:0.5px;
-}
+.modal.m-warn {border-color:rgba(255,159,10,0.38);}
+.modal.m-block{border-color:rgba(255,69,58,0.42);}
+@keyframes slideUp{from{transform:translateY(60px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+.modal-handle{width:36px;height:4px;background:rgba(255,255,255,0.2);border-radius:2px;margin:0 auto 18px;}
+.modal h2{font-size:19px;font-weight:800;text-align:center;margin-bottom:4px;}
+.modal h2.ok{color:var(–green);}
+.modal h2.warn{color:#ffcc66;}
+.modal h2.block{color:#ff9090;}
+.modal-sub{font-family:var(–mono);font-size:11px;color:rgba(255,255,255,0.5);text-align:center;margin-bottom:16px;}
+.blockers{margin-bottom:12px;}
+.blocker-item{display:flex;align-items:flex-start;gap:8px;padding:10px 13px;background:rgba(255,69,58,0.12);border:1px solid rgba(255,69,58,0.3);border-radius:12px;margin-bottom:6px;}
+.blocker-icon{font-size:14px;flex-shrink:0;}
+.blocker-text{font-size:13px;font-weight:600;color:#ff9090;line-height:1.3;}
+.modal-recap{margin-bottom:14px;}
+.recap-row{display:flex;align-items:center;gap:10px;padding:9px 13px;border-radius:12px;margin-bottom:5px;}
+.r-done {background:rgba(48,209,88,0.1);border:1px solid rgba(48,209,88,0.22);}
+.r-warn {background:rgba(255,159,10,0.1);border:1px solid rgba(255,159,10,0.22);}
+.r-block{background:rgba(255,69,58,0.1);border:1px solid rgba(255,69,58,0.28);}
+.recap-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.r-done .recap-dot{background:var(–green);}
+.r-warn .recap-dot{background:#ffcc66;}
+.r-block .recap-dot{background:#ff9090;}
+.recap-name{font-size:13px;font-weight:700;flex:1;text-transform:uppercase;letter-spacing:0.5px;color:#fff;}
+.recap-score{font-family:var(–mono);font-size:11px;color:rgba(255,255,255,0.45);}
+.r-done .recap-score{color:var(–green);}
+.r-block .recap-score{color:#ff9090;}
+.modal-close{display:block;width:100%;padding:14px;background:rgba(255,255,255,0.08);color:#fff;border:1px solid rgba(255,255,255,0.16);border-radius:14px;font-size:14px;font-weight:600;cursor:pointer;text-align:center;margin-top:8px;box-shadow:inset 0 1px 0 rgba(255,255,255,0.16);}
+.modal-close.danger{background:rgba(255,69,58,0.14);color:#ff9090;border-color:rgba(255,69,58,0.32);}
 
-body::after{content:’’;position:fixed;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(48,209,88,0.5),transparent);animation:scan 7s linear infinite;pointer-events:none;z-index:999;}
-@keyframes scan{from{top:-2px;}to{top:100vh;}}
+/* ══ CHRONO SET ══ */
+.cset-modal{background:#1c1c1e;border:1px solid rgba(255,255,255,0.15);border-bottom:none;border-radius:22px 22px 0 0;padding:20px 18px calc(28px + env(safe-area-inset-bottom));width:100%;max-width:360px;animation:slideUp .25s ease;box-shadow:inset 0 1px 0 rgba(255,255,255,0.18);}
+.cset-modal h3{font-size:17px;font-weight:800;color:var(–teal);margin-bottom:20px;text-align:center;}
+.dur-row{display:flex;align-items:center;gap:12px;margin-bottom:20px;justify-content:center;}
+.dur-lbl{font-family:var(–mono);font-size:12px;color:rgba(255,255,255,0.55);}
+.dur-inp{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.22);color:#ffcc66;font-family:var(–mono);font-size:28px;padding:10px 14px;border-radius:12px;width:84px;text-align:center;outline:none;}
+.dur-inp:focus{border-color:#ffcc66;}
+.dur-unit{font-family:var(–mono);font-size:14px;color:rgba(255,255,255,0.55);}
+.dur-apply{width:100%;padding:15px;background:rgba(90,200,250,0.2);color:#fff;border:1px solid rgba(90,200,250,0.35);border-radius:14px;font-size:16px;font-weight:800;cursor:pointer;box-shadow:inset 0 1px 0 rgba(255,255,255,0.2);}
 </style>
 
 </head>
@@ -404,21 +286,14 @@ body::after{content:’’;position:fixed;top:0;left:0;right:0;height:2px;backgr
   <div class="clock" id="clock">--:--:--</div>
 </header>
 
-<div class="train-info">
-  <div class="info-field"><span class="info-label">Train N°</span><input class="info-input" id="numTrain" placeholder="——" maxlength="6" inputmode="numeric"></div>
-  <div class="info-field"><span class="info-label">Voie</span><input class="info-input" id="voie" placeholder="——" maxlength="4"></div>
-  <div class="info-field"><span class="info-label">HD</span><input class="info-input" id="hd" placeholder="HH:MM" maxlength="5" inputmode="numeric" oninput="hdAutoColon(this)"></div>
-  <div class="info-field"><span class="info-label">Ligne</span><input class="info-input wide" id="ligne" placeholder="ex: Cham.-Mod." maxlength="14"></div>
-</div>
-
 <div class="chrono-bar">
   <span class="chrono-label">⏱ Freins</span>
-  <div class="chrono-display idle" id="chronoDisplay">04:00</div>
-  <div class="chrono-prog"><div class="chrono-bg"><div class="chrono-fill" id="chronoFill" style="width:0%"></div></div></div>
+  <div class="chrono-display idle" id="cDisp">04:00</div>
+  <div class="chrono-prog"><div class="chrono-bg"><div class="chrono-fill" id="cFill" style="width:0%"></div></div></div>
   <div class="chrono-btns">
-    <button class="cbtn cbtn-start" id="cbtnStart" onclick="chronoToggle()">START</button>
-    <button class="cbtn cbtn-set" onclick="openChronoSet()">SET</button>
-    <button class="cbtn cbtn-rst" onclick="chronoReset()">RST</button>
+    <button class="cbtn cbtn-start" id="cBtn" onclick="cToggle()">START</button>
+    <button class="cbtn cbtn-set" onclick="openSet()">SET</button>
+    <button class="cbtn cbtn-rst" onclick="cReset()">RST</button>
   </div>
 </div>
 
@@ -433,28 +308,27 @@ body::after{content:’’;position:fixed;top:0;left:0;right:0;height:2px;backgr
 <div class="progress-wrap">
   <div class="progress-header">
     <span class="progress-label">Progression</span>
-    <span class="progress-count" id="progressCount">0 / 0</span>
+    <span class="progress-count" id="pCount">0 / 0</span>
   </div>
-  <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill" style="width:0%"></div></div>
+  <div class="progress-bar-bg"><div class="progress-bar-fill" id="pFill" style="width:0%"></div></div>
 </div>
 
-<div id="checklistContainer"></div>
+<div id="CL"></div>
 
 <div class="bottom-bar">
   <button class="btn btn-reset" onclick="resetAll()">↺ Reset</button>
-  <button class="btn" id="btnDepart" onclick="showRecap()">▶ Récap départ</button>
+  <button class="btn" id="btnR" onclick="showRecap()">▶ Récap</button>
 </div>
 
-<div class="modal-overlay" id="overlay" onclick="closeOverlay(event)">
-  <div class="modal" id="modalContent"><div class="modal-handle"></div></div>
+<div class="modal-overlay" id="ov" onclick="closeOv(event)">
+  <div class="modal" id="mc"><div class="modal-handle"></div></div>
 </div>
-
-<div class="modal-overlay" id="chronoOverlay" onclick="closeChronoOverlay(event)">
-  <div class="chrono-set-modal">
+<div class="modal-overlay" id="cov" onclick="closeCov(event)">
+  <div class="cset-modal">
     <h3>⏱ Durée minuteur</h3>
-    <div class="dur-custom-row">
-      <span class="dur-custom-label">Durée :</span>
-      <input class="dur-custom-input" id="durCustom" type="number" min="1" max="60" value="4" inputmode="numeric">
+    <div class="dur-row">
+      <span class="dur-lbl">Durée :</span>
+      <input class="dur-inp" id="dInp" type="number" min="1" max="60" value="4" inputmode="numeric">
       <span class="dur-unit">min</span>
     </div>
     <button class="dur-apply" onclick="applyDur()">Appliquer</button>
@@ -462,404 +336,103 @@ body::after{content:’’;position:fixed;top:0;left:0;right:0;height:2px;backgr
 </div>
 
 <script>
-// ═══ CHRONO ═══════════════════════════════════════════════════
-let chronoTarget=4*60, chronoElapsed=0, chronoRunning=false, chronoIval=null;
+// CHRONO
+let cT=4*60,cE=0,cR=false,cIv=null;
+function cTick(){cE++;drawC();if(cE===cT){try{const ctx=new AudioContext();[880,880,1100].forEach((f,i)=>{const o=ctx.createOscillator(),g=ctx.createGain();o.connect(g);g.connect(ctx.destination);o.frequency.value=f;const t=ctx.currentTime+i*.28;g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.4,t+.04);g.gain.exponentialRampToValueAtTime(.001,t+.25);o.start(t);o.stop(t+.25);});}catch(e){}let n=0;const b=document.querySelector('.chrono-bar');const iv=setInterval(()=>{b.style.background=n%2===0?'rgba(48,209,88,0.2)':'rgba(255,255,255,0.05)';if(++n>5){clearInterval(iv);b.style.background='';}},250);}}
+function drawC(){const d=document.getElementById('cDisp'),f=document.getElementById('cFill'),b=document.getElementById('cBtn');if(!cR&&cE===0){d.textContent=`${String(Math.floor(cT/60)).padStart(2,'0')}:${String(cT%60).padStart(2,'0')}`;d.className='chrono-display idle';f.style.width='0%';b.textContent='START';b.className='cbtn cbtn-start';return;}d.textContent=`${String(Math.floor(cE/60)).padStart(2,'0')}:${String(cE%60).padStart(2,'0')}`;f.style.width=Math.min(cE/cT*100,100)+'%';if(cE<cT){d.className='chrono-display run';f.style.background='#ff9f0a';}else{d.className='chrono-display done';f.style.background='#30d158';}b.textContent=cR?'STOP':'REPRISE';b.className=cR?'cbtn cbtn-start running':'cbtn cbtn-start';}
+function cToggle(){if(cR){clearInterval(cIv);cR=false;}else{cR=true;cIv=setInterval(cTick,1000);}drawC();}
+function cReset(){clearInterval(cIv);cR=false;cE=0;drawC();}
+function openSet(){document.getElementById('dInp').value=Math.round(cT/60);document.getElementById('cov').classList.add('active');}
+function applyDur(){cT=Math.max(1,Math.min(60,parseInt(document.getElementById('dInp').value)||4))*60;cReset();document.getElementById('cov').classList.remove('active');}
+function closeCov(e){if(!e||e.target===document.getElementById('cov'))document.getElementById('cov').classList.remove('active');}
 
-function chronoTick(){
-  chronoElapsed++;
-  renderChrono();
-  if(chronoElapsed===chronoTarget){
-    try{
-      const ctx=new AudioContext();
-      [880,880,1100].forEach((freq,i)=>{
-        const o=ctx.createOscillator(),g=ctx.createGain();
-        o.connect(g);g.connect(ctx.destination);
-        o.frequency.value=freq;
-        const t=ctx.currentTime+i*0.28;
-        g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(0.4,t+0.04);
-        g.gain.exponentialRampToValueAtTime(0.001,t+0.25);
-        o.start(t);o.stop(t+0.25);
-      });
-    }catch(e){}
-    flashDone();
-  }
-}
-
-function renderChrono(){
-  const disp=document.getElementById('chronoDisplay');
-  const fill=document.getElementById('chronoFill');
-  const btn=document.getElementById('cbtnStart');
-  if(!chronoRunning&&chronoElapsed===0){
-    const tm=Math.floor(chronoTarget/60),ts=chronoTarget%60;
-    disp.textContent=`${String(tm).padStart(2,'0')}:${String(ts).padStart(2,'0')}`;
-    disp.className='chrono-display idle';
-    fill.style.width='0%';fill.style.background='#ff9f0a';
-    btn.textContent='START';btn.className='cbtn cbtn-start';
-    return;
-  }
-  const m=Math.floor(chronoElapsed/60),s=chronoElapsed%60;
-  disp.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-  const pct=Math.min(chronoElapsed/chronoTarget*100,100);
-  fill.style.width=pct+'%';
-  if(chronoElapsed<chronoTarget){
-    disp.className='chrono-display run';fill.style.background='#ff9f0a';
-  }else{
-    disp.className='chrono-display done';fill.style.background='#30d158';
-  }
-  btn.textContent=chronoRunning?'STOP':'REPRISE';
-  btn.className=chronoRunning?'cbtn cbtn-start running':'cbtn cbtn-start';
-}
-
-function chronoToggle(){
-  if(chronoRunning){clearInterval(chronoIval);chronoRunning=false;}
-  else{chronoRunning=true;chronoIval=setInterval(chronoTick,1000);}
-  renderChrono();
-}
-function chronoReset(){clearInterval(chronoIval);chronoRunning=false;chronoElapsed=0;renderChrono();}
-function flashDone(){
-  const bar=document.querySelector('.chrono-bar');if(!bar)return;
-  let c=0;const iv=setInterval(()=>{
-    bar.style.background=c%2===0?'rgba(48,209,88,0.2)':'';
-    if(++c>5){clearInterval(iv);bar.style.background='';}
-  },250);
-}
-function openChronoSet(){document.getElementById('durCustom').value=Math.round(chronoTarget/60);document.getElementById('chronoOverlay').classList.add('active');}
-function applyDur(){const v=parseInt(document.getElementById('durCustom').value)||4;chronoTarget=Math.max(1,Math.min(60,v))*60;chronoReset();document.getElementById('chronoOverlay').classList.remove('active');}
-function closeChronoOverlay(e){if(!e||e.target===document.getElementById('chronoOverlay'))document.getElementById('chronoOverlay').classList.remove('active');}
-
-// ═══ HD AUTO-COLON ════════════════════════════════════════════
-function hdAutoColon(input){let v=input.value.replace(/\D/g,'');if(v.length>=3)v=v.slice(0,2)+':'+v.slice(2,4);input.value=v;}
-
-// ═══ DONNÉES ══════════════════════════════════════════════════
-const CHECKLIST=[
-  {id:'ps',secClass:'sec-ps',badge:'PRISE DE SERVICE',title:'Prise de service',
-   masterId:'ps_master',masterLabel:'Prise de service déjà effectuée',
-   masterHint:'Cocher si déjà réalisée — sinon dérouler le détail',
-   note:'Êtes-vous en accord avec votre PS ?',
-   groups:[
-    {label:'Équipement & documents',items:[
-      {id:'ps1',label:'SIRIUS et pochette chargés',detail:'Mémento, licence et Attestation Complémentaire vérifiés',tag:'oblig'},
-      {id:'ps2',label:'Arrivée à l\'heure à la PS',tag:'oblig'},
-    ]},
-    {label:'Consultation & préparation',items:[
-      {id:'ps3',label:'Roulement consulté',tag:'oblig'},
-      {id:'ps4',label:'Casier personnel consulté',detail:'Doc ADC, PACIFIC / ES LOCO',tag:'oblig'},
-      {id:'ps5',label:'Affichage sécurité consulté',tag:'oblig'},
-      {id:'ps6',label:'Avis sécurité (DEFIT) analysés',tag:'oblig'},
-      {id:'ps7',label:'Modifications infrastructure repérées',detail:'LTV et autres modifications prévues mémorisées',tag:'oblig'},
-      {id:'ps8',label:'Documents prélevés',detail:'Formulaires de communication, annexes Sirius…',tag:'oblig'},
-      {id:'ps9',label:'Rubans de lecture posés — LILI associés à la FT',tag:'oblig'},
-    ]},
-  ]},
-  {id:'prep',secClass:'sec-prep',badge:'PRÉP. MISSION',title:'Préparation de la mission',
-   masterId:'prep_master',masterLabel:'Préparation de la mission déjà effectuée',
-   masterHint:'Cocher si déjà réalisée — sinon dérouler le détail',
-   note:'Vérifications sur Sirius Next avant la prise en charge du train.',
-   groups:[
-    {label:'Fiche Train (Sirius Next)',items:[
-      {id:'ft1',label:'Date de la fiche train correcte',tag:'oblig'},
-      {id:'ft2',label:'Numéro de train conforme',tag:'oblig'},
-      {id:'ft3',label:'Masse tracée ≥ masse réelle du train',detail:'La masse tracée doit être supérieure ou égale à la masse totale réelle',tag:'oblig'},
-      {id:'ft4',label:'EM tracé = EM en possession',detail:'Si différent : obtenir l\'autorisation de circulation',tag:'oblig'},
-      {id:'ft5',label:'Avis consultés (LTV, modifications définitives)',tag:'oblig'},
-    ]},
-  ]},
-  {id:'brief',secClass:'sec-brief',badge:'BRIEF',title:'Brief',
-   note:'En fonction du type d\'arrêt et des opérations prévues.',
-   groups:[{label:'',items:[
-    {id:'br1',label:'Brief conducteur / agent au sol réalisé',detail:'N° de voie · conditions PAR et AuM · opérations de sécurité · résultat essai de frein',tag:'cond'},
-   ]}]},
-  {id:'bf',secClass:'sec-bf',badge:'BF',title:'Bulletin de Freinage',note:null,
-   groups:[
-    {label:'Identification',items:[
-      {id:'bf1',label:'Date correcte',tag:'oblig'},
-      {id:'bf2',label:'Numéro de train conforme',tag:'oblig'},
-      {id:'bf3',label:'Destination correcte',tag:'oblig'},
-    ]},
-    {label:'Caractéristiques',items:[
-      {id:'bf4',label:'Tonnage total des véhicules vérifié',tag:'oblig'},
-      {id:'bf5',label:'MFR ≥ MFN',detail:'Masse Freinée Réalisée ≥ Masse Freinée Nécessaire',formula:'MFR ≥ MFN',tag:'oblig'},
-      {id:'bf6',label:'ATE : présence confirmée (oui / non)',tag:'oblig'},
-      {id:'bf7',label:'Restrictions de vitesse signalées',detail:'Wagons limitants, charges spéciales, essieux hors norme…',tag:'oblig'},
-    ]},
-    {label:'Composition',items:[
-      {id:'bf8',label:'Positionnement du 1er wagon identifié',detail:'Ordre de liste cohérent avec la composition réelle',tag:'oblig'},
-      {id:'bf9',label:'Liste MD présente si applicable',detail:'Si matières dangereuses à bord : liste MD jointe et vérifiée',tag:'cond'},
-    ]},
-  ]},
-  {id:'ppe_b',secClass:'sec-ppe-b',badge:'PPE BORD',title:'PPE Bord',note:null,
-   groups:[
-    {label:'Vérifications composition',items:[
-      {id:'pb1',label:'N° wagon tête confirmé',detail:'Numéro du 1er wagon derrière la machine cohérent avec BF et liste MD',tag:'oblig'},
-      {id:'pb2',label:'Attelage machine / 1er wagon vérifié',detail:'Attelage correctement serré entre l\'engin moteur et le premier véhicule',tag:'oblig'},
-      {id:'pb3',label:'Dispositif vide / chargé vérifié',detail:'Commutateur en position conforme au chargement réel',tag:'oblig'},
-      {id:'pb4',label:'Dispositif de freinage : Marchandise ou Voyageur',detail:'Régime de frein (M ou V) conforme au type de matériel remorqué',tag:'oblig'},
-    ]},
-    {label:'Systèmes embarqués',items:[
-      {id:'pb5',label:'Signalisation d\'avant mise en service',tag:'oblig'},
-      {id:'pb6',label:'Dispositifs de sécurité et automatismes vérifiés',detail:'RSO, veille automatique, VACMA — selon engin',tag:'oblig'},
-      {id:'pb7',label:'Paramétrage bord réalisé (KVB, ETCS…)',detail:'N° train, longueur, masse freinée, catégorie vitesse',tag:'oblig'},
-      {id:'pb8',label:'N° de train indexé dans le terminal GSM-R',tag:'oblig'},
-      {id:'pb9',label:'Mobile pro GSM-GFU ARES activé si ligne équipée',tag:'cond'},
-    ]},
-  ]},
-  {id:'ppe_s',secClass:'sec-ppe-s',badge:'PPE SOL',title:'PPE Sol',note:null,
-   groups:[{label:'',items:[
-    {id:'ps_ess',label:'Résultat essai de frein reçu',detail:'Conformité transmise par l\'opérateur sol',tag:'oblig',blocker:'⛔ Résultat essai de frein non reçu — départ interdit'},
-    {id:'ps_ter',label:'PPE Sol terminé reçu',detail:'« PPE Sol terminé » — verbal ou écrit',tag:'oblig',blocker:'⛔ PPE Sol non terminé — départ interdit'},
-   ]}]},
-  {id:'par',secClass:'sec-par',badge:'PAR',title:'Déclaration Prêt à Accéder au Réseau',
-   note:'En fonction du type d\'arrêt et des opérations prévues.',
-   groups:[{label:'',items:[
-    {id:'r1',label:'PAR nécessaire dans cette situation ?',detail:'1er accès RFN · arrêt avec modif composition · relève',tag:'cond'},
-    {id:'r2',label:'PAR transmis au SGC',detail:'« Train N°…, Voie N°…, Prêt à accéder au réseau »',tag:'oblig',blocker:'⛔ PAR non transmis au SGC — départ interdit'},
-    {id:'r3',label:'Wagons MD signalés si applicable',tag:'cond'},
-   ]}]},
-  {id:'aum',secClass:'sec-aum',badge:'AuM',title:'Autorisation de Mouvement',note:null,
-   groups:[{label:'',items:[
-    {id:'a1',label:'AuM reçue',detail:'Signalisation · verbal SGC · dépêche · signal à main AuM',tag:'oblig',blocker:'⛔ AuM non reçue — départ interdit'},
-    {id:'a2',label:'Type de marche décidé',detail:'Marche avec restriction —ou— Marche normale',tag:'oblig'},
-   ]}]},
-  {id:'hd',secClass:'sec-hd',badge:'HD',title:'Heure de Départ',note:null,
-   groups:[{label:'',items:[
-    {id:'h1',label:'HD contrôlée',detail:'Ne pas partir avant l\'HD sans ordre explicite',tag:'oblig',blocker:'⛔ HD non contrôlée — vérifier l\'heure de départ'},
-   ]}]},
+// DONNÉES
+const DATA=[
+  {id:'ps',sc:'sec-ps',b:'PRISE DE SERVICE',t:'Prise de service',mid:'psm',ml:'Prise de service déjà effectuée',mh:'Cocher si déjà réalisée — sinon dérouler le détail',note:'Êtes-vous en accord avec votre PS ?',
+   groups:[{label:'Équipement & documents',items:[{id:'ps1',label:'SIRIUS et pochette chargés',detail:'Mémento, licence et Attestation Complémentaire vérifiés',tag:'o'},{id:'ps2',label:'Arrivée à l\'heure à la PS',tag:'o'}]},{label:'Consultation & préparation',items:[{id:'ps3',label:'Roulement consulté',tag:'o'},{id:'ps4',label:'Casier personnel consulté',detail:'Doc ADC, PACIFIC / ES LOCO',tag:'o'},{id:'ps5',label:'Affichage sécurité consulté',tag:'o'},{id:'ps6',label:'Avis sécurité (DEFIT) analysés',tag:'o'},{id:'ps7',label:'Modifications infrastructure repérées',detail:'LTV et autres modifications prévues mémorisées',tag:'o'},{id:'ps8',label:'Documents prélevés',detail:'Formulaires de communication, annexes Sirius…',tag:'o'},{id:'ps9',label:'Rubans de lecture posés — LILI associés à la FT',tag:'o'}]}]},
+  {id:'prep',sc:'sec-prep',b:'PRÉP. MISSION',t:'Préparation de la mission',mid:'prm',ml:'Préparation de la mission déjà effectuée',mh:'Cocher si déjà réalisée — sinon dérouler le détail',note:'Vérifications sur Sirius Next avant la prise en charge du train.',
+   groups:[{label:'Fiche Train',items:[{id:'ft1',label:'Date de la fiche train correcte',tag:'o'},{id:'ft2',label:'Numéro de train conforme',tag:'o'},{id:'ft3',label:'Masse tracée ≥ masse réelle du train',detail:'La masse tracée doit être supérieure ou égale à la masse totale réelle',tag:'o'},{id:'ft4',label:'EM tracé = EM en possession',detail:'Si différent : obtenir l\'autorisation de circulation',tag:'o'},{id:'ft5',label:'Avis consultés (LTV, modifications définitives)',tag:'o'}]}]},
+  {id:'brief',sc:'sec-brief',b:'BRIEF',t:'Brief',note:'En fonction du type d\'arrêt et des opérations prévues.',
+   groups:[{label:'',items:[{id:'br1',label:'Brief conducteur / agent au sol réalisé',detail:'N° de voie · conditions PAR et AuM · opérations de sécurité · résultat essai de frein',tag:'c'}]}]},
+  {id:'bf',sc:'sec-bf',b:'BF',t:'Bulletin de Freinage',note:null,
+   groups:[{label:'Identification',items:[{id:'bf1',label:'Date correcte',tag:'o'},{id:'bf2',label:'Numéro de train conforme',tag:'o'},{id:'bf3',label:'Destination correcte',tag:'o'}]},{label:'Caractéristiques',items:[{id:'bf4',label:'Tonnage total des véhicules vérifié',tag:'o'},{id:'bf5',label:'MFR ≥ MFN',detail:'Masse Freinée Réalisée ≥ Masse Freinée Nécessaire',formula:'MFR ≥ MFN',tag:'o'},{id:'bf6',label:'ATE : présence confirmée (oui / non)',tag:'o'},{id:'bf7',label:'Restrictions de vitesse signalées',detail:'Wagons limitants, charges spéciales…',tag:'o'}]},{label:'Composition',items:[{id:'bf8',label:'Positionnement du 1er wagon identifié',detail:'Ordre de liste cohérent avec la composition réelle',tag:'o'},{id:'bf9',label:'Liste MD présente si applicable',detail:'Si matières dangereuses : liste MD jointe et vérifiée',tag:'c'}]}]},
+  {id:'ppe_b',sc:'sec-ppe-b',b:'PPE BORD',t:'PPE Bord',note:null,
+   groups:[{label:'Composition',items:[{id:'pb1',label:'N° wagon tête confirmé',detail:'Cohérent avec BF et liste MD',tag:'o'},{id:'pb2',label:'Attelage machine / 1er wagon vérifié',tag:'o'},{id:'pb3',label:'Dispositif vide / chargé vérifié',tag:'o'},{id:'pb4',label:'Dispositif de freinage : M ou V',detail:'Régime conforme au type de matériel remorqué',tag:'o'}]},{label:'Systèmes embarqués',items:[{id:'pb5',label:'Signalisation d\'avant mise en service',tag:'o'},{id:'pb6',label:'Dispositifs de sécurité vérifiés',detail:'RSO, veille, VACMA — selon engin',tag:'o'},{id:'pb7',label:'Paramétrage bord réalisé (KVB, ETCS…)',detail:'N° train, longueur, masse freinée, catégorie vitesse',tag:'o'},{id:'pb8',label:'N° de train indexé dans le terminal GSM-R',tag:'o'},{id:'pb9',label:'Mobile pro GSM-GFU ARES activé si ligne équipée',tag:'c'}]}]},
+  {id:'ppe_s',sc:'sec-ppe-s',b:'PPE SOL',t:'PPE Sol',note:null,
+   groups:[{label:'',items:[{id:'pe1',label:'Résultat essai de frein reçu',detail:'Conformité transmise par l\'opérateur sol',tag:'o',bl:'⛔ Résultat essai de frein non reçu — départ interdit'},{id:'pe2',label:'PPE Sol terminé reçu',detail:'« PPE Sol terminé » — verbal ou écrit',tag:'o',bl:'⛔ PPE Sol non terminé — départ interdit'}]}]},
+  {id:'par',sc:'sec-par',b:'PAR',t:'Déclaration Prêt à Accéder au Réseau',note:'En fonction du type d\'arrêt.',
+   groups:[{label:'',items:[{id:'r1',label:'PAR nécessaire dans cette situation ?',detail:'1er accès RFN · modif composition · relève',tag:'c'},{id:'r2',label:'PAR transmis au SGC',detail:'« Train N°…, Voie N°…, Prêt à accéder au réseau »',tag:'o',bl:'⛔ PAR non transmis au SGC — départ interdit'},{id:'r3',label:'Wagons MD signalés si applicable',tag:'c'}]}]},
+  {id:'aum',sc:'sec-aum',b:'AuM',t:'Autorisation de Mouvement',note:null,
+   groups:[{label:'',items:[{id:'a1',label:'AuM reçue',detail:'Signalisation · verbal SGC · dépêche · signal à main AuM',tag:'o',bl:'⛔ AuM non reçue — départ interdit'},{id:'a2',label:'Type de marche décidé',detail:'Marche avec restriction —ou— Marche normale',tag:'o'}]}]},
+  {id:'hd',sc:'sec-hd',b:'HD',t:'Heure de Départ',note:null,
+   groups:[{label:'',items:[{id:'h1',label:'HD contrôlée',detail:'Ne pas partir avant l\'HD sans ordre explicite',tag:'o',bl:'⛔ HD non contrôlée — vérifier l\'heure de départ'}]}]},
 ];
 
-// ═══ HELPERS ══════════════════════════════════════════════════
-function subItems(sec){return sec.groups.flatMap(g=>g.items);}
-function allItems(){return CHECKLIST.flatMap(s=>subItems(s));}
-function sectionScore(sec){
-  if(sec.masterId){const allDone=subItems(sec).every(i=>state[i.id]);return{done:(state[sec.masterId]||allDone)?1:0,total:1};}
-  const items=subItems(sec);return{done:items.filter(i=>state[i.id]).length,total:items.length};
-}
-function globalScore(){let d=0,t=0;CHECKLIST.forEach(s=>{const sc=sectionScore(s);d+=sc.done;t+=sc.total;});return{done:d,total:t};}
-function getBlockers(){return allItems().filter(i=>i.blocker&&!state[i.id]);}
+// HELPERS
+function subs(s){return s.groups.flatMap(g=>g.items);}
+function sScore(s){if(s.mid){return{d:(state[s.mid]||subs(s).every(i=>state[i.id]))?1:0,t:1};}const it=subs(s);return{d:it.filter(i=>state[i.id]).length,t:it.length};}
+function gScore(){let d=0,t=0;DATA.forEach(s=>{const sc=sScore(s);d+=sc.d;t+=sc.t;});return{d,t};}
+function bls(){return DATA.flatMap(s=>subs(s)).filter(i=>i.bl&&!state[i.id]);}
 
-// ═══ STATE ════════════════════════════════════════════════════
+// STATE
 let state={};
-function loadState(){try{const s=localStorage.getItem('cl-fret-v8');if(s)state=JSON.parse(s);}catch(e){}}
-function saveState(){try{localStorage.setItem('cl-fret-v8',JSON.stringify(state));}catch(e){}}
+function load(){try{const s=localStorage.getItem('fret-v10');if(s)state=JSON.parse(s);}catch(e){}}
+function save(){try{localStorage.setItem('fret-v10',JSON.stringify(state));}catch(e){}}
 
-// ═══ RENDER ═══════════════════════════════════════════════════
+// RENDER
 function render(){
-  const container=document.getElementById('checklistContainer');
-  container.innerHTML='';
-  CHECKLIST.forEach(sec=>{
-    const score=sectionScore(sec);
-    const allOk=score.done===score.total;
+  const c=document.getElementById('CL');c.innerHTML='';
+  DATA.forEach(sec=>{
+    const sc=sScore(sec),ok=sc.d===sc.t;
     const div=document.createElement('div');
-    // Toutes les sections fermées par défaut — collapsed sauf si state dit ouvert
-    div.className=`section ${sec.secClass}${state['_open_'+sec.id]?'':' collapsed'}`;
-    div.id='sec-'+sec.id;
-
-    let progressText;
-    if(sec.masterId){
-      const sd=subItems(sec).filter(i=>state[i.id]).length;
-      progressText=(state[sec.masterId]||allOk)?'✓':`${sd}/${subItems(sec).length}`;
-    }else{progressText=`${score.done}/${score.total}`;}
-
-    let bodyInner='';
-    if(sec.masterId){
-      const mc=state[sec.masterId]?'checked':'';
-      const subOpen=state['_sub_'+sec.id];
-      bodyInner=`
-        <div class="master-item ${mc}" id="master-${sec.id}" onclick="toggleMaster('${sec.id}')">
-          <div class="checkbox"><span class="checkmark">✓</span></div>
-          <div style="flex:1">
-            <div class="master-label">${sec.masterLabel}</div>
-            <div class="master-hint">${sec.masterHint}</div>
-          </div>
-        </div>
-        <div class="submenu-toggle ${subOpen?'submenu-open':''}" id="stoggle-${sec.id}" onclick="toggleSub('${sec.id}')">
-          <span class="submenu-arrow">▶</span> Détail des vérifications
-        </div>
-        <div class="submenu" id="smenu-${sec.id}" style="${subOpen?'':'display:none'}">
-          ${renderGroups(sec)}
-        </div>`;
-    }else{bodyInner=renderGroups(sec);}
-
-    const noteHtml=sec.note?`<div class="section-note"><span class="warn">⚠</span> ${sec.note}</div>`:'';
-    div.innerHTML=`
-      <div class="section-header" onclick="toggleSec('${sec.id}')">
-        <div class="section-title-wrap">
-          <span class="section-badge">${sec.badge}</span>
-          <span class="section-title">${sec.title}</span>
-        </div>
-        <div class="section-meta">
-          <span class="section-progress" id="sp-${sec.id}">${progressText}</span>
-          <span class="chevron">▼</span>
-        </div>
-      </div>
-      <div class="section-body">${bodyInner}${noteHtml}</div>`;
-    container.appendChild(div);
-  });
-  updateProgress();
+    div.className=`section ${sec.sc}${state['_o_'+sec.id]?'':' collapsed'}`;div.id='s-'+sec.id;
+    let pt=sec.mid?(state[sec.mid]||ok?'✓':`${subs(sec).filter(i=>state[i.id]).length}/${subs(sec).length}`):`${sc.d}/${sc.t}`;
+    let body='';
+    if(sec.mid){
+      const mc=state[sec.mid]?'checked':'',so=state['_sb_'+sec.id];
+      body=`<div class="master-item ${mc}" id="mi-${sec.id}" onclick="tM('${sec.id}')"><div class="checkbox"><span class="checkmark">✓</span></div><div style="flex:1"><div class="master-label">${sec.ml}</div><div class="master-hint">${sec.mh}</div></div></div><div class="submenu-toggle ${so?'submenu-open':''}" id="st-${sec.id}" onclick="tS('${sec.id}')"><span class="submenu-arrow">▶</span> Détail des vérifications</div><div class="submenu" id="sm-${sec.id}" style="${so?'':'display:none'}">${rG(sec)}</div>`;
+    }else{body=rG(sec);}
+    const note=sec.note?`<div class="section-note"><span class="warn">⚠</span> ${sec.note}</div>`:'';
+    div.innerHTML=`<div class="section-header" onclick="tSec('${sec.id}')"><div class="section-title-wrap"><span class="section-badge">${sec.b}</span><span class="section-title">${sec.t}</span></div><div class="section-meta"><span class="section-progress" id="sp-${sec.id}">${pt}</span><span class="chevron">▼</span></div></div><div class="section-body">${body}${note}</div>`;
+    c.appendChild(div);
+  });upProg();
 }
 
-function renderGroups(sec){
-  return sec.groups.map(g=>{
-    const lbl=g.label?`<div class="sub-group-label">${g.label}</div>`:'';
-    return lbl+g.items.map(item=>{
-      const ck=state[item.id]?'checked':'';
-      const tag=item.tag?`<span class="item-tag tag-${item.tag}">${item.tag==='oblig'?'⚠ Obligatoire':'◈ Conditionnel'}</span>`:'';
-      const fml=item.formula?`<div class="formula">${item.formula}</div>`:'';
-      return `<div class="check-item ${ck}" id="item-${item.id}" onclick="toggleItem('${item.id}')">
-        <div class="checkbox"><span class="checkmark">✓</span></div>
-        <div class="item-content">
-          <div class="item-label">${item.label}</div>
-          ${item.detail?`<div class="item-detail">${item.detail}</div>`:''}
-          ${fml}${tag}
-        </div>
-      </div>`;
-    }).join('');
-  }).join('');
-}
+function rG(sec){return sec.groups.map(g=>{const lbl=g.label?`<div class="sub-group-label">${g.label}</div>`:'';return lbl+g.items.map(it=>{const ck=state[it.id]?'checked':'';const tag=it.tag?`<span class="item-tag tag-${it.tag==='o'?'oblig':'cond'}">${it.tag==='o'?'⚠ Obligatoire':'◈ Conditionnel'}</span>`:'';const fml=it.formula?`<div class="formula">${it.formula}</div>`:'';return `<div class="check-item ${ck}" id="it-${it.id}" onclick="tI('${it.id}')"><div class="checkbox"><span class="checkmark">✓</span></div><div class="item-content"><div class="item-label">${it.label}</div>${it.detail?`<div class="item-detail">${it.detail}</div>`:''}${fml}${tag}</div></div>`;}).join('');}).join('');}
 
-// ═══ INTERACTIONS ═════════════════════════════════════════════
-function toggleItem(id){
-  state[id]=!state[id];saveState();
-  const el=document.getElementById('item-'+id);
-  state[id]?el.classList.add('checked'):el.classList.remove('checked');
-  refreshCounters();updateProgress();
-}
-function toggleMaster(secId){
-  const sec=CHECKLIST.find(s=>s.id===secId);
-  state[sec.masterId]=!state[sec.masterId];saveState();
-  const el=document.getElementById('master-'+secId);
-  state[sec.masterId]?el.classList.add('checked'):el.classList.remove('checked');
-  refreshCounters();updateProgress();
-}
-function toggleSub(secId){
-  const key='_sub_'+secId;state[key]=!state[key];saveState();
-  const menu=document.getElementById('smenu-'+secId);
-  const tgl=document.getElementById('stoggle-'+secId);
-  if(state[key]){menu.style.display='block';tgl.classList.add('submenu-open');}
-  else{menu.style.display='none';tgl.classList.remove('submenu-open');}
-}
-function toggleSec(id){
-  const key='_open_'+id;state[key]=!state[key];saveState();
-  document.getElementById('sec-'+id).classList.toggle('collapsed');
-}
+// INTERACTIONS
+function tI(id){state[id]=!state[id];save();const el=document.getElementById('it-'+id);state[id]?el.classList.add('checked'):el.classList.remove('checked');rC();upProg();}
+function tM(sid){const sec=DATA.find(s=>s.id===sid);state[sec.mid]=!state[sec.mid];save();const el=document.getElementById('mi-'+sid);state[sec.mid]?el.classList.add('checked'):el.classList.remove('checked');rC();upProg();}
+function tS(sid){const k='_sb_'+sid;state[k]=!state[k];save();const m=document.getElementById('sm-'+sid),t=document.getElementById('st-'+sid);if(state[k]){m.style.display='block';t.classList.add('submenu-open');}else{m.style.display='none';t.classList.remove('submenu-open');}}
+function tSec(id){const k='_o_'+id;state[k]=!state[k];save();document.getElementById('s-'+id).classList.toggle('collapsed');}
+function rC(){DATA.forEach(sec=>{const sc=sScore(sec),ok=sc.d===sc.t;const el=document.getElementById('sp-'+sec.id);if(!el)return;el.textContent=sec.mid?(state[sec.mid]||ok?'✓':`${subs(sec).filter(i=>state[i.id]).length}/${subs(sec).length}`):`${sc.d}/${sc.t}`;});}
+function upProg(){const{d,t}=gScore();document.getElementById('pCount').textContent=`${d} / ${t}`;document.getElementById('pFill').style.width=`${(d/t*100).toFixed(1)}%`;const btn=document.getElementById('btnR'),bl=bls();if(bl.length>0){btn.className='btn btn-block';btn.textContent=`⛔ Récap (${bl.length} bloquant${bl.length>1?'s':''})` ;}else if(d===t){btn.className='btn btn-ok';btn.textContent='▶ Récap départ';}else{btn.className='btn btn-warn';btn.textContent=`⚠ Récap (${d}/${t})`;}}
 
-function refreshCounters(){
-  CHECKLIST.forEach(sec=>{
-    const score=sectionScore(sec);const allOk=score.done===score.total;
-    const el=document.getElementById('sp-'+sec.id);if(!el)return;
-    if(sec.masterId){
-      const sd=subItems(sec).filter(i=>state[i.id]).length;
-      el.textContent=(state[sec.masterId]||allOk)?'✓':`${sd}/${subItems(sec).length}`;
-    }else{el.textContent=`${score.done}/${score.total}`;}
-  });
-}
+// RESET
+function resetAll(){const mc=document.getElementById('mc');mc.className='modal m-warn';mc.innerHTML=`<div class="modal-handle"></div><h2 class="warn" style="margin-bottom:12px;">↺ Réinitialiser</h2><p style="text-align:center;color:rgba(255,255,255,0.55);font-size:13px;margin-bottom:20px;">Effacer toute la checklist ?</p><button class="modal-close danger" onclick="doReset()">Oui, tout effacer</button><button class="modal-close" style="margin-top:8px;" onclick="closeM()">Annuler</button>`;document.getElementById('ov').classList.add('active');}
+function doReset(){closeM();state={};save();render();}
 
-function updateProgress(){
-  const{done,total}=globalScore();
-  document.getElementById('progressCount').textContent=`${done} / ${total}`;
-  document.getElementById('progressFill').style.width=`${(done/total*100).toFixed(1)}%`;
-  const btn=document.getElementById('btnDepart');
-  const bl=getBlockers();
-  if(bl.length>0){btn.className='btn btn-block';btn.textContent=`⛔ Récap (${bl.length} bloquant${bl.length>1?'s':''})` ;}
-  else if(done===total){btn.className='btn btn-ok';btn.textContent='▶ Récap départ';}
-  else{btn.className='btn btn-warn';btn.textContent=`⚠ Récap (${done}/${total})`;}
-}
-
-// ═══ RESET ════════════════════════════════════════════════════
-function resetAll(){
-  const ov=document.getElementById('overlay');
-  const mc=document.getElementById('modalContent');
-  mc.className='modal m-warn';
-  mc.innerHTML=`<div class="modal-handle"></div>
-    <h2 class="warn" style="margin-bottom:12px;">↺ Réinitialiser</h2>
-    <p style="text-align:center;color:rgba(255,255,255,0.6);font-size:13px;margin-bottom:20px;">Effacer toute la checklist et les champs ?</p>
-    <button class="modal-close danger" onclick="doReset()">Oui, tout effacer</button>
-    <button class="modal-close" style="margin-top:8px;" onclick="closeModal()">Annuler</button>`;
-  ov.classList.add('active');
-}
-function doReset(){
-  closeModal();
-  state={};saveState();
-  ['numTrain','voie','hd','ligne'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
-  render();
-}
-
-// ═══ RÉCAP ════════════════════════════════════════════════════
+// RÉCAP
 function showRecap(){
-  const{done,total}=globalScore();
-  const blockers=getBlockers();
-  const numTrain=document.getElementById('numTrain').value||'—';
-  const voie=document.getElementById('voie').value||'—';
-  const hd=document.getElementById('hd').value||'—';
-  const now=new Date();
-  const heure=`${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
-
-  const infoHtml=`<div class="modal-traininfo">
-    <div class="mti"><div class="l">Train</div><div class="v">${numTrain}</div></div>
-    <div class="mti"><div class="l">Voie</div><div class="v">${voie}</div></div>
-    <div class="mti"><div class="l">HD</div><div class="v">${hd}</div></div>
-    <div class="mti"><div class="l">Heure</div><div class="v">${heure}</div></div>
-  </div>`;
-
-  let blockersHtml='';
-  if(blockers.length>0){
-    blockersHtml='<div class="blockers">'+blockers.map(b=>`
-      <div class="blocker-item"><span class="blocker-icon">⛔</span><span class="blocker-text">${b.blocker}</span></div>`).join('')+'</div>';
-  }
-
-  let recapHtml='<div class="modal-recap">';
-  CHECKLIST.forEach(sec=>{
-    const s=sectionScore(sec);const isDone=s.done===s.total;
-    const secBl=subItems(sec).filter(i=>i.blocker&&!state[i.id]);
-    const rowClass=secBl.length>0?'r-block':isDone?'r-done':'r-warn';
-    let scoreLabel;
-    if(sec.masterId){scoreLabel=state[sec.masterId]?'Case directe ✓':isDone?'✓ OK':`${subItems(sec).filter(i=>state[i.id]).length}/${subItems(sec).length}`;}
-    else{scoreLabel=isDone?'✓ OK':`${s.done}/${s.total}`;}
-    recapHtml+=`<div class="recap-row ${rowClass}">
-      <div class="recap-dot"></div>
-      <div class="recap-name">${sec.badge}</div>
-      <div class="recap-score">${scoreLabel}${secBl.length>0?' ⛔':''}</div>
-    </div>`;
-  });
-  recapHtml+='</div>';
-
-  const content=document.getElementById('modalContent');
-  if(blockers.length>0){
-    content.className='modal m-block';
-    content.innerHTML=`<div class="modal-handle"></div>
-      <h2 class="block">⛔ Départ bloqué</h2>
-      <p class="modal-sub">Conditions obligatoires non remplies</p>
-      ${infoHtml}${blockersHtml}${recapHtml}
-      <button class="modal-close" onclick="closeModal()">← Revenir compléter</button>`;
-  }else if(done===total){
-    content.className='modal';
-    content.innerHTML=`<div class="modal-handle"></div>
-      <h2 class="ok">✓ Prêt au départ</h2>
-      <p class="modal-sub">Toutes les vérifications sont validées</p>
-      ${infoHtml}${recapHtml}
-      <button class="modal-close" onclick="closeModal()">Fermer</button>`;
-  }else{
-    content.className='modal m-warn';
-    content.innerHTML=`<div class="modal-handle"></div>
-      <h2 class="warn">⚠ Incomplet</h2>
-      <p class="modal-sub">${done}/${total} sections validées — aucun bloquant</p>
-      ${infoHtml}${recapHtml}
-      <button class="modal-close" onclick="closeModal()">Fermer</button>`;
-  }
-  document.getElementById('overlay').classList.add('active');
+  const{d,t}=gScore(),bl=bls();
+  const now=new Date(),h=`${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+  let blH='';if(bl.length>0)blH='<div class="blockers">'+bl.map(b=>`<div class="blocker-item"><span class="blocker-icon">⛔</span><span class="blocker-text">${b.bl}</span></div>`).join('')+'</div>';
+  let rec='<div class="modal-recap">';
+  DATA.forEach(sec=>{const sc=sScore(sec),ok=sc.d===sc.t;const sb=subs(sec).filter(i=>i.bl&&!state[i.id]);const rc=sb.length>0?'r-block':ok?'r-done':'r-warn';const sl=sec.mid?(state[sec.mid]?'Validé ✓':ok?'✓ OK':`${subs(sec).filter(i=>state[i.id]).length}/${subs(sec).length}`):(ok?'✓ OK':`${sc.d}/${sc.t}`);rec+=`<div class="recap-row ${rc}"><div class="recap-dot"></div><div class="recap-name">${sec.b}</div><div class="recap-score">${sl}${sb.length>0?' ⛔':''}</div></div>`;});
+  rec+=`</div><p style="text-align:center;font-family:var(--mono);font-size:11px;color:rgba(255,255,255,0.3);margin-bottom:12px;">${h}</p>`;
+  const mc=document.getElementById('mc');
+  if(bl.length>0){mc.className='modal m-block';mc.innerHTML=`<div class="modal-handle"></div><h2 class="block">⛔ Départ bloqué</h2><p class="modal-sub">Conditions non remplies</p>${blH}${rec}<button class="modal-close" onclick="closeM()">← Revenir compléter</button>`;}
+  else if(d===t){mc.className='modal';mc.innerHTML=`<div class="modal-handle"></div><h2 class="ok">✓ Prêt au départ</h2><p class="modal-sub">Toutes les vérifications validées</p>${rec}<button class="modal-close" onclick="closeM()">Fermer</button>`;}
+  else{mc.className='modal m-warn';mc.innerHTML=`<div class="modal-handle"></div><h2 class="warn">⚠ Incomplet</h2><p class="modal-sub">${d}/${t} sections — aucun bloquant</p>${rec}<button class="modal-close" onclick="closeM()">Fermer</button>`;}
+  document.getElementById('ov').classList.add('active');
 }
+function closeOv(e){if(e.target===document.getElementById('ov'))closeM();}
+function closeM(){document.getElementById('ov').classList.remove('active');}
 
-function closeOverlay(e){if(e.target===document.getElementById('overlay'))closeModal();}
-function closeModal(){document.getElementById('overlay').classList.remove('active');}
-
-// ═══ HORLOGE ══════════════════════════════════════════════════
-function tick(){
-  const n=new Date();
-  document.getElementById('clock').textContent=
-    `${String(n.getHours()).padStart(2,'0')}:${String(n.getMinutes()).padStart(2,'0')}:${String(n.getSeconds()).padStart(2,'0')}`;
-}
+// HORLOGE
+function tick(){const n=new Date();document.getElementById('clock').textContent=`${String(n.getHours()).padStart(2,'0')}:${String(n.getMinutes()).padStart(2,'0')}:${String(n.getSeconds()).padStart(2,'0')}`;}
 setInterval(tick,1000);tick();
-
-loadState();render();
+load();render();
 </script>
 
 </body>
