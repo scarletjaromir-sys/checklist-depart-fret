@@ -333,13 +333,21 @@ background:rgba(255,255,255,0.02);
 border-left:3px solid rgba(255,255,255,0.12);
 border-radius:0 0 8px 8px; padding:8px 12px 10px;
 }
+.pave-actions { counter-reset:pa; }
 .pave-actions li {
 display:flex; align-items:flex-start; gap:8px;
 padding:5px 0; font-size:14px; color:#fff; line-height:1.45;
 border-bottom:1px solid rgba(255,255,255,0.04);
+counter-increment:pa;
 }
 .pave-actions li:last-child { border-bottom:none; }
-.pave-actions li::before { content:‘▸’; color:#5ac8fa; font-size:11px; flex-shrink:0; margin-top:3px; }
+.pave-actions li::before {
+content:counter(pa);
+font-family:var(–mono); font-size:11px; font-weight:800; color:rgba(255,255,255,0.5);
+background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15);
+border-radius:5px; min-width:22px; height:22px;
+display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;
+}
 
 /* ── REFS COLORÉES CLIQUABLES ── */
 .fref {
