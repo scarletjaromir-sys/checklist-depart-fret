@@ -1,0 +1,1846 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Procédures">
+<meta name="theme-color" content="#1c1c1e">
+<title>Procédures Hexafret</title>
+<style>
+:root {
+  --mono: ui-monospace,'SF Mono',Menlo,monospace;
+  --sans: -apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
+  --mem-blue:   #1e6fa8;
+  --mem-blue-l: rgba(30,111,168,0.22);
+  --amber:  #ff9f0a;
+  --red:    #ff453a;
+  --green:  #2da84f;
+  --teal:   #5ac8fa;
+  --f-green:#34c759;
+  --f-red:  #ff453a;
+}
+html { background-color:#1c1c1e!important; min-height:100%; }
+body {
+  font-family:var(--sans); color:#fff; min-height:100dvh;
+  padding:0 0 30px;
+  background-color:#1c1c1e!important;
+  background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='0.4' stroke-opacity='0.06'%3E%3Cpath d='M0 60L60 0M-10 10L10 -10M50 70L70 50'/%3E%3C/g%3E%3C/svg%3E")!important;
+  background-size:60px 60px!important;
+}
+
+/* ── HEADER ── */
+header {
+background:rgba(28,28,30,0.92);
+border-bottom:1px solid rgba(255,255,255,0.12);
+padding:env(safe-area-inset-top,14px) 18px 0;
+position:sticky; top:0; z-index:100;
+backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+}
+.header-row { display:flex; align-items:center; gap:10px; padding-bottom:10px; }
+.logo-badge {
+background:linear-gradient(135deg,#3478f6,#1a5fd4);
+color:#fff; font-family:var(–mono); font-weight:900; font-size:10px;
+letter-spacing:2px; padding:4px 10px; border-radius:6px;
+border:1px solid rgba(255,255,255,0.25);
+box-shadow:inset 0 1px 0 rgba(255,255,255,0.35),0 2px 8px rgba(0,0,0,0.4);
+flex-shrink:0;
+}
+header h1 { font-weight:700; font-size:15px; letter-spacing:1px; text-transform:uppercase; color:#fff; }
+.header-sub { font-family:var(–mono); font-size:9px; color:rgba(255,255,255,0.5); letter-spacing:0.5px; margin-top:1px; }
+
+/* ── NAV ── */
+nav { display:flex; gap:6px; overflow-x:auto; padding:0 18px 12px; scrollbar-width:none; }
+nav::-webkit-scrollbar { display:none; }
+.tab-btn {
+flex-shrink:0; font-family:var(–mono); font-size:10px; font-weight:700;
+letter-spacing:0.5px; padding:6px 12px; border-radius:20px; cursor:pointer;
+background:rgba(255,255,255,0.06);
+backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+border:1px solid rgba(255,255,255,0.18);
+box-shadow:inset 0 1px 0 rgba(255,255,255,0.18),0 2px 6px rgba(0,0,0,0.3);
+color:rgba(255,255,255,0.7); transition:all .2s;
+}
+.tab-btn.active {
+background:rgba(52,120,246,0.25); border-color:rgba(52,120,246,0.5); color:#fff;
+box-shadow:inset 0 1px 0 rgba(255,255,255,0.25),0 0 12px rgba(52,120,246,0.3);
+}
+
+/* ── MAIN ── */
+main { padding:12px 16px 40px; max-width:600px; margin:0 auto; }
+.tab-panel { display:none; }
+.tab-panel.active { display:block; }
+
+/* ── SECTION CARD ── */
+.section { margin-bottom:10px; border-radius:16px; overflow:hidden; transition:transform .25s,box-shadow .25s; }
+.section:hover { transform:translateY(-2px); box-shadow:0 12px 40px rgba(0,0,0,0.5); }
+.section-header {
+display:flex; align-items:center; justify-content:space-between;
+padding:14px 16px; cursor:pointer; user-select:none;
+border-radius:16px;
+background:rgba(255,255,255,0.03);
+backdrop-filter:blur(30px) saturate(200%); -webkit-backdrop-filter:blur(30px) saturate(200%);
+border:1px solid rgba(255,255,255,0.22);
+box-shadow:inset 0 0 12px rgba(255,255,255,0.12),inset 0 1px 0 rgba(255,255,255,0.18),0 8px 24px rgba(0,0,0,0.4);
+position:relative;
+}
+.section:not(.collapsed) .section-header { border-radius:16px 16px 0 0; border-bottom-color:rgba(255,255,255,0.08); }
+.sec-engin   .section-header::before { content:’’; position:absolute; inset:0; border-radius:inherit; pointer-events:none; background:linear-gradient(135deg,rgba(255,255,255,0.18) 0%,rgba(255,255,255,0) 35%),linear-gradient(170deg,rgba(52,120,246,0.18) 0%,rgba(52,120,246,0) 70%); }
+.sec-frein   .section-header::before { content:’’; position:absolute; inset:0; border-radius:inherit; pointer-events:none; background:linear-gradient(135deg,rgba(255,255,255,0.18) 0%,rgba(255,255,255,0) 35%),linear-gradient(170deg,rgba(255,69,58,0.15) 0%,rgba(255,69,58,0) 70%); }
+.sec-sondage .section-header::before { content:’’; position:absolute; inset:0; border-radius:inherit; pointer-events:none; background:linear-gradient(135deg,rgba(255,255,255,0.18) 0%,rgba(255,255,255,0) 35%),linear-gradient(170deg,rgba(255,159,10,0.15) 0%,rgba(255,159,10,0) 70%); }
+.sec-circ    .section-header::before { content:’’; position:absolute; inset:0; border-radius:inherit; pointer-events:none; background:linear-gradient(135deg,rgba(255,255,255,0.18) 0%,rgba(255,255,255,0) 35%),linear-gradient(170deg,rgba(45,164,79,0.15) 0%,rgba(45,164,79,0) 70%); }
+.section-header::after { content:’’; position:absolute; inset:0; border-radius:inherit; pointer-events:none; background:linear-gradient(135deg,rgba(255,255,255,0.28) 0%,rgba(255,255,255,0.10) 18%,transparent 40%); }
+.sh-left { display:flex; flex-direction:column; gap:3px; position:relative; z-index:1; flex:1; }
+.sh-title { font-size:15px; font-weight:700; color:#fff; line-height:1.2; letter-spacing:-0.2px; }
+.sh-sub { font-family:var(–mono); font-size:11px; color:rgba(255,255,255,0.55); letter-spacing:0.3px; margin-top:2px; }
+.sh-right { display:flex; align-items:center; gap:8px; position:relative; z-index:1; flex-shrink:0; }
+.chevron { color:rgba(255,255,255,0.7); font-size:10px; transition:transform .2s; }
+.section.collapsed .chevron { transform:rotate(-90deg); }
+.section-body {
+background:rgba(255,255,255,0.02);
+backdrop-filter:blur(30px) saturate(180%); -webkit-backdrop-filter:blur(30px) saturate(180%);
+border:1px solid rgba(255,255,255,0.16); border-top:none; border-radius:0 0 16px 16px;
+box-shadow:inset 1px 0 0 rgba(255,255,255,0.08),inset -1px 0 0 rgba(255,255,255,0.04),inset 0 -2px 0 rgba(255,255,255,0.08),0 10px 28px rgba(0,0,0,0.3);
+}
+.section.collapsed .section-body { display:none; }
+
+/* ── BLOC AI ── */
+.ai-block { padding:12px 16px 14px; background:rgba(255,69,58,0.07); border-bottom:1px solid rgba(255,255,255,0.07); }
+.ai-label { font-family:var(–mono); font-size:10px; font-weight:800; letter-spacing:1.2px; text-transform:uppercase; color:#ff6b6b; margin-bottom:10px; }
+
+/* ── LISTE NUMÉROTÉE ── */
+.action-list { list-style:none; padding:0; margin:0; counter-reset:ac; }
+.action-list li {
+counter-increment:ac;
+display:flex; align-items:flex-start; gap:10px;
+padding:7px 0; font-size:15px; font-weight:500; color:#fff; line-height:1.4;
+border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.action-list li:last-child { border-bottom:none; }
+.action-list li::before {
+content:counter(ac);
+font-family:var(–mono); font-size:11px; font-weight:800; color:rgba(255,255,255,0.5);
+background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15);
+border-radius:5px; min-width:22px; height:22px;
+display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;
+}
+
+/* ── SOUS-LABEL INTERNE ── */
+.inner-label {
+padding:10px 16px 6px;
+font-size:13px; font-weight:700; color:rgba(255,255,255,0.8);
+border-top:1px solid rgba(255,255,255,0.07);
+}
+
+/* ── PAVÉ CAS ── */
+.cas-block { padding:10px 16px 12px; border-bottom:1px solid rgba(255,255,255,0.06); }
+.cas-block:last-child { border-bottom:none; }
+.pave { border-radius:8px 8px 0 0; padding:8px 12px; font-size:13px; font-weight:700; margin-bottom:0; line-height:1.3; }
+.pave-blue  { background:var(–mem-blue-l);           border-left:3px solid var(–mem-blue); color:#7ec8f4; }
+.pave-teal  { background:rgba(26,154,138,0.18);       border-left:3px solid #1a9a8a;         color:#6dddd1; }
+.pave-amber { background:rgba(255,159,10,0.14);       border-left:3px solid var(–amber);    color:#ffc966; }
+.pave-green { background:rgba(45,164,79,0.14);        border-left:3px solid var(–green);    color:#7fe89a; }
+.pave-red   { background:rgba(255,69,58,0.14);        border-left:3px solid var(–red);      color:#ff9999; }
+.pave-actions {
+background:rgba(255,255,255,0.02);
+border-left:3px solid rgba(255,255,255,0.12);
+border-radius:0 0 8px 8px; padding:8px 12px 10px;
+}
+.pave-actions { counter-reset:pa; }
+.pave-actions li {
+display:flex; align-items:flex-start; gap:8px;
+padding:5px 0; font-size:14px; color:#fff; line-height:1.45;
+border-bottom:1px solid rgba(255,255,255,0.04);
+counter-increment:pa;
+}
+.pave-actions li:last-child { border-bottom:none; }
+.pave-actions li::before {
+content:counter(pa);
+font-family:var(–mono); font-size:11px; font-weight:800; color:rgba(255,255,255,0.5);
+background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.15);
+border-radius:5px; min-width:22px; height:22px;
+display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;
+}
+
+/* ── REFS COLORÉES CLIQUABLES ── */
+.fref {
+font-family:var(–mono); font-weight:800; color:var(–f-green)!important;
+font-size:inherit; cursor:pointer;
+text-decoration:underline; text-decoration-color:rgba(52,199,89,0.35);
+text-underline-offset:2px;
+}
+.fref:hover { color:#6ee77e!important; }
+.bpurg { font-family:var(–mono); font-weight:800; color:var(–f-red)!important; font-size:inherit; }
+
+/* ── VALEURS CRITIQUES ── */
+.val { font-family:var(–mono); font-size:14px; font-weight:900; border-radius:6px; padding:1px 6px; display:inline; vertical-align:baseline; white-space:nowrap; }
+.val-red   { color:#ff8888; background:rgba(255,69,58,0.16);    border:1px solid rgba(255,69,58,0.3); }
+.val-amber { color:#ffcc66; background:rgba(255,159,10,0.16);   border:1px solid rgba(255,159,10,0.3); }
+.val-teal  { color:#7dd8f8; background:rgba(90,200,250,0.12);   border:1px solid rgba(90,200,250,0.3); }
+.val-green { color:#88ffaa; background:rgba(45,164,79,0.16);    border:1px solid rgba(45,164,79,0.3); }
+
+/* ── NOTE BAS ── */
+.proc-note { padding:9px 16px; background:rgba(255,159,10,0.05); border-top:1px solid rgba(255,255,255,0.06); font-size:12px; color:rgba(255,255,255,0.7); line-height:1.55; }
+.proc-note .w { color:#ffcc66; font-weight:700; }
+
+/* ══════════════════════════════════════
+SONDAGE FREIN
+══════════════════════════════════════ */
+.sondage-wrap { padding:14px 16px 18px; }
+.sond-step { display:none; }
+.sond-step.active { display:block; }
+
+.sond-question {
+font-size:16px; font-weight:700; color:#fff;
+line-height:1.4; margin-bottom:14px; padding:12px 14px;
+background:rgba(255,255,255,0.05);
+border-left:3px solid var(–amber); border-radius:0 10px 10px 0;
+}
+.sond-question .q-label {
+font-family:var(–mono); font-size:9px; font-weight:800;
+letter-spacing:1px; color:var(–amber); text-transform:uppercase;
+display:block; margin-bottom:5px;
+}
+.sond-btns { display:flex; gap:10px; margin-bottom:8px; flex-wrap:wrap; }
+.sond-btn {
+flex:1; padding:14px 10px; border-radius:14px;
+font-family:var(–mono); font-size:14px; font-weight:800; letter-spacing:1px;
+cursor:pointer;
+backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px);
+border:1px solid;
+box-shadow:inset 0 1px 0 rgba(255,255,255,0.2),0 4px 12px rgba(0,0,0,0.4);
+transition:all .15s;
+}
+.sond-btn:active { transform:scale(0.97); }
+.btn-oui    { background:rgba(45,164,79,0.2);  border-color:rgba(45,164,79,0.5);  color:#88ffaa; }
+.btn-non    { background:rgba(255,69,58,0.2);  border-color:rgba(255,69,58,0.5);  color:#ffaaaa; }
+.btn-neutre { background:rgba(255,159,10,0.2); border-color:rgba(255,159,10,0.5); color:#ffcc66; }
+.btn-next   { background:rgba(90,200,250,0.15);border-color:rgba(90,200,250,0.4); color:#7dd8f8; flex:2; }
+.btn-back   { flex:none; width:100%; padding:10px; background:rgba(255,255,255,0.05); border-color:rgba(255,255,255,0.2); color:rgba(255,255,255,0.6); font-size:12px; }
+
+.sond-result {
+background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.15);
+border-radius:12px; padding:14px; margin-top:4px;
+}
+.res-title {
+font-size:13px; font-weight:800; text-transform:uppercase; letter-spacing:0.5px;
+margin-bottom:10px; padding-bottom:8px; border-bottom:1px solid rgba(255,255,255,0.08);
+}
+.res-title.green { color:#88ffaa; }
+.res-title.amber { color:#ffcc66; }
+.res-title.red   { color:#ffaaaa; }
+.res-title.blue  { color:#7ec8f4; }
+.sond-result ul { list-style:none; padding:0; margin:0; }
+.sond-result ul li {
+display:flex; align-items:baseline; gap:8px;
+padding:5px 0; font-size:14px; color:#fff; line-height:1.4;
+border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.sond-result ul li:last-child { border-bottom:none; }
+.sond-result ul li::before { content:‘▸’; color:#5ac8fa; flex-shrink:0; font-size:11px; }
+
+/* Bloc 5T */
+.cinq-t {
+background:rgba(255,69,58,0.06); border:1px solid rgba(255,69,58,0.2);
+border-radius:10px; padding:10px 12px; margin:10px 0;
+}
+.cinq-t-title { font-family:var(–mono); font-size:10px; font-weight:800; letter-spacing:1px; color:#ff9999; text-transform:uppercase; margin-bottom:8px; }
+.cinq-t-row {
+display:flex; align-items:baseline; gap:0;
+padding:4px 0; font-size:13px; color:#fff; line-height:1.4;
+border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.cinq-t-row:last-child { border-bottom:none; }
+.cinq-t-letter { font-family:var(–mono); font-weight:900; font-size:15px; color:#ff9999; width:14px; flex-shrink:0; display:inline-block; }
+.cinq-t-word { font-size:13px; }
+
+.sond-nav { display:flex; gap:8px; margin-top:12px; }
+.sond-reset { flex:1; padding:11px; border-radius:12px; font-family:var(–mono); font-size:11px; font-weight:700; letter-spacing:1px; cursor:pointer; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.2); color:rgba(255,255,255,0.6); }
+.sond-back-res { flex:1; padding:11px; border-radius:12px; font-family:var(–mono); font-size:11px; font-weight:700; letter-spacing:1px; cursor:pointer; background:rgba(90,200,250,0.08); border:1px solid rgba(90,200,250,0.25); color:#7dd8f8; }
+
+.breadcrumb { font-family:var(–mono); font-size:10px; color:rgba(255,255,255,0.4); margin-bottom:12px; line-height:1.6; }
+.breadcrumb span { color:rgba(255,255,255,0.7); }
+/* ══ SOUS-CATÉGORIES CIRCULATION ══ */
+.subcat {
+margin-bottom: 8px;
+}
+.subcat-header {
+display: flex; align-items: center; justify-content: space-between;
+padding: 10px 14px;
+background: rgba(255,255,255,0.05);
+border: 1px solid rgba(255,255,255,0.14);
+border-radius: 12px;
+cursor: pointer; user-select: none;
+margin-bottom: 0;
+transition: background .2s;
+}
+.subcat:not(.sc-collapsed) .subcat-header {
+border-radius: 12px 12px 0 0;
+border-bottom-color: rgba(255,255,255,0.06);
+}
+.subcat-header:active { background: rgba(255,255,255,0.09); }
+.subcat-title {
+font-family: var(–mono); font-size: 11px; font-weight: 800;
+letter-spacing: 0.8px; text-transform: uppercase;
+color: rgba(255,255,255,0.8);
+display: flex; align-items: center; gap: 8px;
+}
+.subcat-title .sc-icon { font-size: 14px; }
+.subcat-count {
+font-family: var(–mono); font-size: 10px;
+color: rgba(255,255,255,0.35);
+}
+.sc-chevron { color: rgba(255,255,255,0.5); font-size: 10px; transition: transform .2s; }
+.subcat.sc-collapsed .sc-chevron { transform: rotate(-90deg); }
+.subcat-body {
+background: rgba(255,255,255,0.01);
+border: 1px solid rgba(255,255,255,0.1);
+border-top: none;
+border-radius: 0 0 12px 12px;
+padding: 8px 0 4px;
+margin-bottom: 4px;
+}
+.subcat.sc-collapsed .subcat-body { display: none; }
+.subcat-body .section { margin: 0 8px 8px; }
+/* ── MARCHE À VUE highlight ── */
+.mav {
+background: rgba(255,159,10,0.18);
+border: 1px solid rgba(255,159,10,0.4);
+color: #ffcc66;
+font-weight: 800;
+border-radius: 5px;
+padding: 1px 6px;
+font-size: inherit;
+white-space: nowrap;
+}
+
+/* ── BLOC COMMUN (actions partagées) ── */
+.common-block {
+padding: 10px 16px 12px;
+background: rgba(255,255,255,0.04);
+border-bottom: 1px solid rgba(255,255,255,0.07);
+}
+.common-label {
+font-family: var(–mono); font-size: 10px; font-weight: 800;
+letter-spacing: 1px; text-transform: uppercase;
+color: rgba(255,255,255,0.45); margin-bottom: 8px;
+}
+</style>
+
+</head>
+<body>
+
+<header>
+  <div class="header-row">
+    <a href="https://scarletjaromir-sys.github.io/checklist-depart-fret" style="font-family:var(--mono);font-size:11px;font-weight:700;color:rgba(255,255,255,0.7);text-decoration:none;padding:4px 0;flex-shrink:0;">‹ Retour</a>
+    <div style="width:1px;height:16px;background:rgba(255,255,255,0.15);flex-shrink:0;margin:0 4px;"></div>
+    <div>
+      <h1>Procédures</h1>
+      <div class="header-sub">ACTIONS IMMÉDIATES — FR-20897 V2</div>
+    </div>
+  </div>
+  <nav>
+    <button class="tab-btn active" onclick="showTab('engin',this)">⚙️ ENGIN</button>
+    <button class="tab-btn" onclick="showTab('frein',this)">🔴 FREIN</button>
+    <button class="tab-btn" onclick="showTab('sondage',this)">🔍 SONDAGE</button>
+    <button class="tab-btn" onclick="showTab('circ',this)">🚦 CIRCULATION</button>
+    <button class="tab-btn" onclick="showTab('secu',this)">🔒 SÉCURITÉ</button>
+  </nav>
+</header>
+
+<main>
+
+<!-- ══════════════════════════════════════
+     ENGIN MOTEUR
+══════════════════════════════════════ -->
+
+<div class="tab-panel active" id="tab-engin">
+
+  <div class="section sec-engin collapsed" id="sec-f513">
+    <div class="section-header" onclick="tog('sec-f513')">
+      <div class="sh-left">
+        <div class="sh-title">Isolement de la Veille Automatique</div>
+        <div class="sh-sub">F 513 · Actions immédiates</div>
+      </div>
+      <div class="sh-right"><span class="chevron">▼</span></div>
+    </div>
+    <div class="section-body">
+      <div class="cas-block">
+        <div class="pave pave-blue">Le conducteur est assisté</div>
+        <ul class="pave-actions">
+          <li>Reprendre la marche → <span class="fref">F 490</span></li>
+        </ul>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-blue">Le conducteur n'est pas assisté</div>
+        <ul class="pave-actions">
+          <li>Aviser SGC par radio — à défaut téléphoner après arrêt (1er poste ou gare rencontré)</li>
+          <li>Train VL ≥ MA 100 → <span class="val val-amber">70 km/h</span> max</li>
+          <li>Autres trains → <span class="val val-amber">50 km/h</span> max</li>
+          <li>Se conformer aux instructions → <span class="fref">F 490</span></li>
+        </ul>
+      </div>
+      <div class="proc-note"><span class="w">⚠</span> Aviser la limitation · Renseigner Vigicab · Annoter le carnet de bord</div>
+    </div>
+  </div>
+
+  <div class="section sec-engin collapsed" id="sec-f516">
+    <div class="section-header" onclick="tog('sec-f516')">
+      <div class="sh-left">
+        <div class="sh-title">Avarie de l'avertisseur sonore</div>
+        <div class="sh-sub">F 516 · Actions immédiates</div>
+      </div>
+      <div class="sh-right"><span class="chevron">▼</span></div>
+    </div>
+    <div class="section-body">
+      <div class="ai-block">
+        <div class="ai-label">⚡ Actions immédiates</div>
+        <ol class="action-list">
+          <li>Poursuivre la marche à <span class="val val-red">30 km/h</span> max</li>
+          <li>Aviser SGC via RST — à défaut à la 1ère gare ou arrêt poste</li>
+          <li>Se conformer aux instructions</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="section sec-engin collapsed" id="sec-f517">
+    <div class="section-header" onclick="tog('sec-f517')">
+      <div class="sh-left">
+        <div class="sh-title">Présomption d'avarie de pantographe</div>
+        <div class="sh-sub">F 517 · Actions immédiates</div>
+      </div>
+      <div class="sh-right"><span class="chevron">▼</span></div>
+    </div>
+    <div class="section-body">
+      <div class="ai-block">
+        <div class="ai-label">⚡ Actions immédiates</div>
+        <ol class="action-list">
+          <li>Baisser d'urgence le ou les pantographe(s)</li>
+          <li>S'arrêter d'urgence</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="section sec-engin collapsed" id="sec-f514">
+    <div class="section-header" onclick="tog('sec-f514')">
+      <div class="sh-left">
+        <div class="sh-title">Anomalie liaison radio GSM-R</div>
+        <div class="sh-sub">F 514 · En ligne — Actions immédiates</div>
+      </div>
+      <div class="sh-right"><span class="chevron">▼</span></div>
+    </div>
+    <div class="section-body">
+      <div class="cas-block">
+        <div class="pave pave-blue">En cours de route — Anomalie bord détectée</div>
+        <ul class="pave-actions">
+          <li>Poursuivre la marche sur <span class="val val-teal">10 km</span></li>
+        </ul>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-green">→ L'anomalie cesse (anomalie sol)</div>
+        <ul class="pave-actions">
+          <li>Aviser SGC par radio</li>
+          <li>Si à l'arrêt → <span class="fref">F 490</span></li>
+        </ul>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-amber">→ L'anomalie persiste (anomalie bord)</div>
+        <ul class="pave-actions">
+          <li>Réduire immédiatement à <span class="val val-amber">50 km/h</span> max</li>
+          <li>Considérer la radio en dérangement</li>
+          <li>S'arrêter au 1er T.P.G</li>
+          <li>Aviser SGC · Appliquer GD (<span class="fref">F 501</span>)</li>
+          <li><span class="fref">F 490</span> si à l'arrêt</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /engin -->
+
+<!-- ══════════════════════════════════════
+     FREIN
+══════════════════════════════════════ -->
+
+<div class="tab-panel" id="tab-frein">
+
+  <div class="section sec-frein collapsed" id="sec-f102">
+    <div class="section-header" onclick="tog('sec-f102')">
+      <div class="sh-left">
+        <div class="sh-title">Frein intempestif sans NON DESSERRAGE</div>
+        <div class="sh-sub">F 102 · Actions immédiates</div>
+      </div>
+      <div class="sh-right"><span class="chevron">▼</span></div>
+    </div>
+    <div class="section-body">
+      <div class="ai-block">
+        <div class="ai-label">⚡ Actions immédiates</div>
+        <ol class="action-list">
+          <li>Ramener le manipulateur de traction à zéro</li>
+          <li>Effectuer le sondage frein relatif au matériel concerné</li>
+          <li>S'arrêter</li>
+        </ol>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-amber">Indice de fonctionnement d'un automatisme</div>
+        <ul class="pave-actions">
+          <li>S'arrêter · Appliquer la fiche correspondante, à défaut <span class="fref">F 501</span></li>
+        </ul>
+      </div>
+      <div class="inner-label">Si le sondage frein conclut à :</div>
+      <div class="cas-block">
+        <div class="pave pave-red">Déraillement ou présomption de déraillement</div>
+        <ul class="pave-actions">
+          <li>Appliquer <span class="fref">F 447</span> → <span class="fref">F 442</span> (protection obstacle)</li>
+        </ul>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-amber">Fuite CP</div>
+        <ul class="pave-actions">
+          <li>Appliquer <span class="fref">F 215</span> thème "Dès l'arrêt"</li>
+        </ul>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-amber">RE &lt; 3 bars (ou pas de manomètre RE)</div>
+        <ul class="pave-actions">
+          <li>Appliquer <span class="fref">F 501</span> thème "Dès l'arrêt"</li>
+        </ul>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-red">Fuite CG — Composition FRET et la fuite cesse</div>
+        <ul class="pave-actions">
+          <li>Considérer le train comme déraillé</li>
+          <li>Appliquer <span class="fref">F 447</span> → <span class="fref">F 442</span> (protection obstacle)</li>
+        </ul>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-blue">Fuite CG — Autres cas</div>
+        <ul class="pave-actions">
+          <li>Appliquer <span class="fref">F 201</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section sec-frein collapsed" id="sec-f201">
+    <div class="section-header" onclick="tog('sec-f201')">
+      <div class="sh-left">
+        <div class="sh-title">Chute de pression CG</div>
+        <div class="sh-sub">F 201 · Disjonction / Ouverture QT / Arrêt moteur</div>
+      </div>
+      <div class="sh-right"><span class="chevron">▼</span></div>
+    </div>
+    <div class="section-body">
+      <div class="ai-block">
+        <div class="ai-label">⚡ Actions immédiates</div>
+        <ol class="action-list">
+          <li>Confirmer le freinage</li>
+          <li>Observer le train</li>
+          <li>Appliquer selon la situation ci-dessous</li>
+        </ol>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-red">Rupture d'attelage ou présomption</div>
+        <ul class="pave-actions">
+          <li>Appliquer <span class="fref">F 448</span> → <span class="fref">F 442</span> (protection obstacle)</li>
+        </ul>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-red">Train déraillé ou présomption de déraillement</div>
+        <ul class="pave-actions">
+          <li>Appliquer <span class="fref">F 447</span> → <span class="fref">F 442</span> (protection obstacle)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section sec-frein collapsed" id="sec-f210">
+    <div class="section-header" onclick="tog('sec-f210')">
+      <div class="sh-left">
+        <div class="sh-title">Absence ou insuffisance de freinage — Dérive</div>
+        <div class="sh-sub">F 210 · Actions immédiates</div>
+      </div>
+      <div class="sh-right"><span class="chevron">▼</span></div>
+    </div>
+    <div class="section-body">
+      <div class="cas-block">
+        <div class="pave pave-amber">Il s'agit d'un enrayage</div>
+        <ul class="pave-actions">
+          <li>Appliquer <span class="fref">F 455</span></li>
+        </ul>
+      </div>
+      <div class="ai-block" style="border-top:1px solid rgba(255,255,255,0.07);">
+        <div class="ai-label">⚡ Actions immédiates</div>
+        <ol class="action-list">
+          <li>Freiner d'urgence</li>
+          <li>S'assurer que la traction est coupée</li>
+          <li>Utiliser tous les freins disponibles</li>
+          <li>Sabler</li>
+        </ol>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-red">Dérive</div>
+        <ul class="pave-actions">
+          <li><strong>Ne pas émettre le SAR</strong> — utiliser la phonie</li>
+          <li>Aviser les agents du SGC dotés de la radio (n° train, position, sens de la dérive)</li>
+          <li>Alerter par deux coups de sifflet brefs répétés à intervalles suffisants les agents de train, des gares, des postes, ou travaillant sur la voie (•• •• ••)</li>
+          <li>Aviser les autres agents présents du train si liaison interphonique</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section sec-frein collapsed" id="sec-f215">
+    <div class="section-header" onclick="tog('sec-f215')">
+      <div class="sh-left">
+        <div class="sh-title">Chute de pression à la Conduite Principale</div>
+        <div class="sh-sub">F 215 · Actions immédiates</div>
+      </div>
+      <div class="sh-right"><span class="chevron">▼</span></div>
+    </div>
+    <div class="section-body">
+      <div class="ai-block">
+        <div class="ai-label">⚡ Actions immédiates</div>
+        <ol class="action-list">
+          <li>S'assurer que la traction est coupée</li>
+          <li>Commander la fonction « NEUTRE »</li>
+          <li>Observer le manomètre RP</li>
+        </ol>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-blue">La pression RP se maintient à une valeur supérieure à 6 bars</div>
+        <ul class="pave-actions">
+          <li>Supprimer la fonction « NEUTRE »</li>
+          <li>S'arrêter en choisissant le point d'arrêt</li>
+        </ul>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-red">La pression RP ne se maintient pas à une valeur supérieure à 6 bars</div>
+        <ul class="pave-actions">
+          <li>S'arrêter</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /frein -->
+
+<!-- ══════════════════════════════════════
+     SONDAGE FREIN
+══════════════════════════════════════ -->
+
+<div class="tab-panel" id="tab-sondage">
+  <div class="section sec-sondage" id="sec-sondage">
+    <div class="section-header" style="border-radius:16px 16px 0 0; cursor:default;">
+      <div class="sh-left">
+        <div class="sh-title">🔍 Sondage frein — Arbre décisionnel</div>
+        <div class="sh-sub">F 102 / F 201</div>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="sondage-wrap" id="sondage-wrap">
+
+```
+    <!-- STEP 0 : Automatisme ? -->
+    <div class="sond-step active" id="step-0">
+      <div class="breadcrumb">Début du sondage frein</div>
+      <div class="sond-question">
+        <span class="q-label">Étape 1</span>
+        Indice de fonctionnement d'un <strong>automatisme</strong> ?
+      </div>
+      <div class="sond-btns">
+        <button class="sond-btn btn-oui" onclick="go('res-automatisme','step-0')">OUI</button>
+        <button class="sond-btn btn-non" onclick="go('step-1','step-0')">NON</button>
+      </div>
+    </div>
+
+    <!-- RES : Automatisme -->
+    <div class="sond-step" id="res-automatisme">
+      <div class="breadcrumb">→ <span>Automatisme</span></div>
+      <div class="sond-result">
+        <div class="res-title amber">⚡ Automatisme</div>
+        <ul>
+          <li>S'arrêter</li>
+          <li>Appliquer la fiche correspondante, à défaut <span class="fref">F 501</span></li>
+        </ul>
+      </div>
+      <div class="sond-nav">
+        <button class="sond-back-res" onclick="back()">← Retour</button>
+        <button class="sond-reset" onclick="resetSondage()">↺ Recommencer</button>
+      </div>
+    </div>
+
+    <!-- STEP 1 : Fonction neutre -->
+    <div class="sond-step" id="step-1">
+      <div class="breadcrumb">Pas d'automatisme → <span>Sondage frein</span></div>
+      <div class="sond-question">
+        <span class="q-label">Étape 2</span>
+        Mettre en <strong>fonction neutre</strong>
+      </div>
+      <div class="sond-btns">
+        <button class="sond-btn btn-next" onclick="go('step-2','step-1')">Continuer →</button>
+      </div>
+      <div class="sond-btns">
+        <button class="sond-btn btn-back" onclick="back()">← Retour</button>
+      </div>
+    </div>
+
+    <!-- STEP 2 : Présomption déraillement ? -->
+    <div class="sond-step" id="step-2">
+      <div class="breadcrumb">Fonction neutre → <span>Présomption déraillement ?</span></div>
+      <div class="sond-question">
+        <span class="q-label">Étape 3</span>
+        Y a-t-il une <strong>présomption de déraillement</strong> ?
+      </div>
+      <div class="cinq-t">
+        <div class="cinq-t-title">⚠ Les 5 T</div>
+        <div class="cinq-t-row"><span class="cinq-t-letter">T</span><span class="cinq-t-word">ension — Absence de tension</span></div>
+        <div class="cinq-t-row"><span class="cinq-t-letter">T</span><span class="cinq-t-word">ravaux — Zone LTV avec TIV ≤ 50 km/h (avec ou sans TFR)</span></div>
+        <div class="cinq-t-row"><span class="cinq-t-letter">T</span><span class="cinq-t-word">unnel — Dans un tunnel ou à ses abords</span></div>
+        <div class="cinq-t-row"><span class="cinq-t-letter">T</span><span class="cinq-t-word">rain — Impossibilité de voir la queue du train</span></div>
+        <div class="cinq-t-row"><span class="cinq-t-letter">T</span><span class="cinq-t-word">raction — Accroissement anormal de la résistance</span></div>
+      </div>
+      <div class="sond-btns">
+        <button class="sond-btn btn-oui" onclick="go('res-deraillement','step-2')">OUI</button>
+        <button class="sond-btn btn-non" onclick="go('step-3','step-2')">NON</button>
+      </div>
+      <div class="sond-btns">
+        <button class="sond-btn btn-back" onclick="back()">← Retour</button>
+      </div>
+    </div>
+
+    <!-- RES : Déraillement -->
+    <div class="sond-step" id="res-deraillement">
+      <div class="breadcrumb">→ <span>Présomption de déraillement</span></div>
+      <div class="sond-result">
+        <div class="res-title red">🚨 Présomption de déraillement</div>
+        <ul>
+          <li>Appliquer <span class="fref">F 447</span> → <span class="fref">F 442</span></li>
+        </ul>
+      </div>
+      <div class="sond-nav">
+        <button class="sond-back-res" onclick="back()">← Retour</button>
+        <button class="sond-reset" onclick="resetSondage()">↺ Recommencer</button>
+      </div>
+    </div>
+
+    <!-- STEP 3 : Fuite CP ? -->
+    <div class="sond-step" id="step-3">
+      <div class="breadcrumb">Pas de déraillement → <span>Fuite CP ?</span></div>
+      <div class="sond-question">
+        <span class="q-label">Étape 4</span>
+        Le sondage conclut-il à une <strong>fuite CP</strong> ?
+      </div>
+      <div class="sond-btns">
+        <button class="sond-btn btn-oui" onclick="go('res-fuite-cp','step-3')">OUI</button>
+        <button class="sond-btn btn-non" onclick="go('step-4','step-3')">NON</button>
+      </div>
+      <div class="sond-btns">
+        <button class="sond-btn btn-back" onclick="back()">← Retour</button>
+      </div>
+    </div>
+
+    <!-- RES : Fuite CP -->
+    <div class="sond-step" id="res-fuite-cp">
+      <div class="breadcrumb">→ <span>Fuite CP</span></div>
+      <div class="sond-result">
+        <div class="res-title amber">Fuite CP</div>
+        <ul>
+          <li>S'arrêter · Aviser SGC</li>
+          <li>Appliquer GD (<span class="fref">F 501</span>)</li>
+        </ul>
+      </div>
+      <div class="sond-nav">
+        <button class="sond-back-res" onclick="back()">← Retour</button>
+        <button class="sond-reset" onclick="resetSondage()">↺ Recommencer</button>
+      </div>
+    </div>
+
+    <!-- STEP 4 : PBL fonction service → RE ? -->
+    <div class="sond-step" id="step-4">
+      <div class="breadcrumb">Pas de fuite CP → <span>PBL fonction service</span></div>
+      <div class="sond-question">
+        <span class="q-label">Étape 5 — PBL en fonction service</span>
+        Remettre en <strong>fonction service</strong> — Le RE remonte-t-il à <strong>3 bars</strong> ?
+      </div>
+      <div class="sond-btns">
+        <button class="sond-btn btn-oui" onclick="go('res-pb-cg','step-4')">RE ≥ 3 bars</button>
+        <button class="sond-btn btn-non" onclick="go('res-fuite-rm','step-4')">RE &lt; 3 bars</button>
+      </div>
+      <div class="sond-btns">
+        <button class="sond-btn btn-back" onclick="back()">← Retour</button>
+      </div>
+    </div>
+
+    <!-- RES : RE ≥ 3 bars → Problème CG -->
+    <div class="sond-step" id="res-pb-cg">
+      <div class="breadcrumb">→ <span>RE ≥ 3 bars</span></div>
+      <div class="sond-result">
+        <div class="res-title blue">Problème CG</div>
+        <ul>
+          <li>Appliquer <span class="fref">F 201</span></li>
+        </ul>
+      </div>
+      <div class="sond-nav">
+        <button class="sond-back-res" onclick="back()">← Retour</button>
+        <button class="sond-reset" onclick="resetSondage()">↺ Recommencer</button>
+      </div>
+    </div>
+
+    <!-- RES : RE < 3 bars → Fuite RM / PB EM -->
+    <div class="sond-step" id="res-fuite-rm">
+      <div class="breadcrumb">→ <span>RE &lt; 3 bars</span></div>
+      <div class="sond-result">
+        <div class="res-title red">Fuite RM — Problème EM</div>
+        <ul>
+          <li>Fuite Robinet Mécanicien ou problème EM</li>
+          <li>Appliquer GD (<span class="fref">F 501</span>)</li>
+        </ul>
+      </div>
+      <div class="sond-nav">
+        <button class="sond-back-res" onclick="back()">← Retour</button>
+        <button class="sond-reset" onclick="resetSondage()">↺ Recommencer</button>
+      </div>
+    </div>
+
+  </div><!-- /sondage-wrap -->
+</div>
+```
+
+  </div>
+</div><!-- /sondage -->
+
+<!-- ══════════════════════════════════════
+     CIRCULATION DES TRAINS
+══════════════════════════════════════ -->
+
+<div class="tab-panel" id="tab-circ">
+
+  <!-- ── SOUS-CAT : PROBLÈMES ÉLECTRIQUES ── -->
+
+  <div class="subcat sc-collapsed" id="sc-elec">
+    <div class="subcat-header" onclick="togSC('sc-elec')">
+      <div class="subcat-title"><span class="sc-icon">⚡</span>Problèmes électriques</div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="subcat-count">F 401 · F 403 · F 404 · F 405</span>
+        <span class="sc-chevron">▼</span>
+      </div>
+    </div>
+    <div class="subcat-body">
+
+```
+  <!-- F401 -->
+  <div class="section sec-circ collapsed" id="sec-f401">
+    <div class="section-header" onclick="tog('sec-f401')">
+      <div class="sh-left">
+        <div class="sh-title">Absence de tension d'alimentation caténaire</div>
+        <div class="sh-sub">F 401 · Actions immédiates</div>
+      </div>
+      <div class="sh-right"><span class="chevron">▼</span></div>
+    </div>
+    <div class="section-body">
+      <div class="cas-block">
+        <div class="pave pave-red">Si chute de pression à la CG</div>
+        <ul class="pave-actions">
+          <li>Appliquer <span class="fref">F 201</span></li>
+        </ul>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-amber">MM guidé</div>
+        <ul class="pave-actions">
+          <li>S'arrêter d'urgence</li>
+          <li>Continuer thème "Dès l'arrêt"</li>
+        </ul>
+      </div>
+      <div class="ai-block" style="border-top:1px solid rgba(255,255,255,0.07);">
+        <div class="ai-label">⚡ Actions immédiates</div>
+        <ol class="action-list">
+          <li>Rouler sur l'erre pendant <span class="val val-amber">20 secondes</span> au maximum depuis la détection</li>
+          <li>Observer les voies, les caténaires, les trains, la pression CG, etc.</li>
+        </ol>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-red">Si anomalie ou si la tension n'est pas rétablie dans le délai de 20 secondes</div>
+        <ul class="pave-actions">
+          <li>S'arrêter d'urgence</li>
+        </ul>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-green">Si la tension est rétablie dans le délai de 20 secondes</div>
+        <ul class="pave-actions">
+          <li>Poursuivre la marche</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- F403 -->
+  <div class="section sec-circ collapsed" id="sec-f403">
+    <div class="section-header" onclick="tog('sec-f403')">
+      <div class="sh-left">
+        <div class="sh-title">Signalement par un agent SGC d'une anomalie à la caténaire</div>
+        <div class="sh-sub">F 403 · Actions immédiates</div>
+      </div>
+      <div class="sh-right"><span class="chevron">▼</span></div>
+    </div>
+    <div class="section-body">
+      <div class="ai-block">
+        <div class="ai-label">⚡ Actions immédiates</div>
+        <ol class="action-list">
+          <li>Baisser d'urgence, si nécessaire, le (les) pantographe(s)</li>
+          <li>S'arrêter</li>
+        </ol>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-red">Si danger ou présomption de danger pour une voie voisine</div>
+        <ul class="pave-actions">
+          <li>Assurer la protection obstacles inopinés → <span class="fref">F 442</span></li>
+        </ul>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-amber">Si risque pour les personnes ou le matériel</div>
+        <ul class="pave-actions">
+          <li>Ordonner la coupure d'urgence</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- F404 -->
+  <div class="section sec-circ collapsed" id="sec-f404">
+    <div class="section-header" onclick="tog('sec-f404')">
+      <div class="sh-left">
+        <div class="sh-title">Avarie à la caténaire sur sa voie</div>
+        <div class="sh-sub">F 404 · Actions immédiates</div>
+      </div>
+      <div class="sh-right"><span class="chevron">▼</span></div>
+    </div>
+    <div class="section-body">
+      <div class="ai-block">
+        <div class="ai-label">⚡ Actions immédiates</div>
+        <ol class="action-list">
+          <li>Baisser d'urgence le (les) pantographe(s)</li>
+          <li>S'arrêter</li>
+        </ol>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-red">Danger ou présomption de danger pour une voie voisine</div>
+        <ul class="pave-actions">
+          <li>Assurer la protection obstacles inopinés → <span class="fref">F 442</span></li>
+        </ul>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-amber">Risque pour les personnes ou le matériel</div>
+        <ul class="pave-actions">
+          <li>Ordonner la coupure d'urgence</li>
+          <li>Recevoir la confirmation de la réalisation de la coupure d'urgence</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- F405 -->
+  <div class="section sec-circ collapsed" id="sec-f405">
+    <div class="section-header" onclick="tog('sec-f405')">
+      <div class="sh-left">
+        <div class="sh-title">Baisse de tension en ligne</div>
+        <div class="sh-sub">F 405 · Actions immédiates</div>
+      </div>
+      <div class="sh-right"><span class="chevron">▼</span></div>
+    </div>
+    <div class="section-body">
+      <div class="cas-block">
+        <div class="pave pave-blue">Sous 1 500 V — UL devient inférieure à 1 200 V ou aiguille dans la zone jaune</div>
+        <ul class="pave-actions">
+          <li>Régler l'intensité absorbée pour maintenir la tension à une valeur au moins égale à <span class="val val-amber">1 100 V</span> (aiguille zone verte ou jaune)</li>
+        </ul>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-blue">Sous 25 000 V — UL devient inférieure à 19 000 V ou aiguille dans la zone jaune</div>
+        <ul class="pave-actions">
+          <li>Régler l'intensité absorbée pour maintenir la tension à une valeur au moins égale à <span class="val val-amber">18 000 V</span> (aiguille zone verte ou jaune)</li>
+        </ul>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-red">Si la tension devient inférieure à 1 100 V / 18 000 V (zone rouge)</div>
+        <ul class="pave-actions">
+          <li>Poursuivre la marche sur l'erre jusqu'au moment où la tension est au moins égale à 1 100 V / 18 000 V (zone verte ou jaune)</li>
+        </ul>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-amber">Si la tension ne remonte pas à cette valeur</div>
+        <ul class="pave-actions">
+          <li>Solliciter des instructions du RSS</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /subcat-body elec -->
+```
+
+  </div><!-- /subcat elec -->
+
+  <!-- ── SOUS-CAT : INCIDENT VOIE / TRAIN ── -->
+
+  <!-- ── SOUS-CAT : INTEMPÉRIES ── -->
+
+  <div class="subcat sc-collapsed" id="sc-intemperies">
+    <div class="subcat-header" onclick="togSC('sc-intemperies')">
+      <div class="subcat-title"><span class="sc-icon">🌨️</span>Intempéries</div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="subcat-count">F 420 · F 421 · F 422</span>
+        <span class="sc-chevron">▼</span>
+      </div>
+    </div>
+    <div class="subcat-body">
+
+```
+  <!-- F420 -->
+  <div class="section sec-circ collapsed" id="sec-f420">
+    <div class="section-header" onclick="tog('sec-f420')">
+      <div class="sh-left">
+        <div class="sh-title">Chute de neige — Voie enneigée</div>
+        <div class="sh-sub">F 420</div>
+      </div>
+      <div class="sh-right"><span class="chevron">▼</span></div>
+    </div>
+    <div class="section-body">
+
+      <!-- HLP -->
+      <div class="inner-label" style="background:rgba(255,159,10,0.08); padding:8px 16px 6px; border-bottom:1px solid rgba(255,255,255,0.06);">🔶 Avant mise en mouvement (HLP)</div>
+      <div class="cas-block">
+        <ul class="pave-actions" style="padding:0; background:none; border-left:none;">
+          <li>Serrer le frein <strong>direct</strong> à la pression maximale</li>
+          <li>Effectuer un essai de traction dans le sens du 1er déplacement</li>
+        </ul>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-blue">Une mise en mouvement est constatée</div>
+        <ul class="pave-actions">
+          <li>Circuler avec prudence</li>
+          <li>Maintenir <span class="val val-amber">1 bar</span> aux CF</li>
+          <li>Au retour des conditions normales : continuer comme suit</li>
+          <li>Utiliser périodiquement le frein — montées de pression à <span class="val val-amber">2 bars</span> aux CF pendant quelques secondes</li>
+        </ul>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-blue">Aucune mise en mouvement constatée</div>
+        <ul class="pave-actions">
+          <li>Utiliser périodiquement le frein — montées de pression à <span class="val val-amber">2 bars</span> aux CF pendant quelques secondes</li>
+        </ul>
+      </div>
+
+      <!-- Mise en tête -->
+      <div class="inner-label" style="background:rgba(255,159,10,0.08); padding:8px 16px 6px; border-top:1px solid rgba(255,255,255,0.07); border-bottom:1px solid rgba(255,255,255,0.06);">🔶 Mise en tête</div>
+      <div class="cas-block">
+        <ul class="pave-actions" style="padding:0; background:none; border-left:none;">
+          <li>S'arrêter à une vingtaine de mètres des véhicules</li>
+          <li>Serrer le frein <strong>direct</strong> à <span class="val val-amber">1 bar</span> environ aux CF</li>
+          <li>Procéder à l'accostage</li>
+        </ul>
+      </div>
+
+      <!-- Pour toutes les circulations -->
+      <div class="inner-label" style="background:rgba(255,159,10,0.08); padding:8px 16px 6px; border-top:1px solid rgba(255,255,255,0.07); border-bottom:1px solid rgba(255,255,255,0.06);">🔶 Pour toutes les circulations</div>
+      <div class="cas-block">
+        <ul class="pave-actions" style="padding:0; background:none; border-left:none;">
+          <li>Anticiper la mise en action du frein</li>
+          <li>À chaque arrêt : dépression d'au moins <span class="val val-amber">1,5 bar</span> dans la CG — à défaut serrage gradué maximum</li>
+        </ul>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-amber">Si avis ou constat de projection de neige glacée ou poudreuse</div>
+        <ul class="pave-actions">
+          <li>Réduire la vitesse du train</li>
+          <li>Aviser SGC (régulateur, à défaut agent-circulation) par radio — à défaut au 1er arrêt par téléphonie ou téléphone de voie</li>
+          <li>Respecter les restrictions de vitesse selon les ordres reçus</li>
+        </ul>
+      </div>
+
+    </div>
+  </div><!-- /F420 -->
+
+  <!-- F421 -->
+  <div class="section sec-circ collapsed" id="sec-f421">
+    <div class="section-header" onclick="tog('sec-f421')">
+      <div class="sh-left">
+        <div class="sh-title">Mauvais captage dû au givre — Avis de givre</div>
+        <div class="sh-sub">F 421 · Actions immédiates</div>
+      </div>
+      <div class="sh-right"><span class="chevron">▼</span></div>
+    </div>
+    <div class="section-body">
+
+      <div class="cas-block">
+        <div class="pave pave-amber">Si phénomène de "danse" sous 25 000 V</div>
+        <ul class="pave-actions">
+          <li>Aviser SGC par radio — à défaut après arrêt à la 1ère gare</li>
+        </ul>
+      </div>
+
+      <div class="ai-block">
+        <div class="ai-label">⚡ Actions immédiates — Si mauvais captage dû au givre (tableau GIVRE allumé ou non) / tableau GIVRE indûment éteint / absence de givre en zone signalée givrée</div>
+        <ol class="action-list">
+          <li>Aviser SGC par radio — à défaut téléphoner au 1er arrêt</li>
+          <li>Appliquer les prescriptions selon la situation</li>
+        </ol>
+      </div>
+
+      <div class="cas-block">
+        <div class="pave pave-blue">Locomotive(s) sous 1 500 V</div>
+        <ul class="pave-actions">
+          <li>Lever les deux pantographes</li>
+          <li>En UM/DT : uniquement sur l'engin de tête — à défaut continuer jusqu'au 1er arrêt permettant d'isoler pneumatiquement un panto sur la 2ème loco</li>
+          <li>S'efforcer de limiter l'intensité absorbée — réduire l'effort de traction via MPT (sélecteur puissance pos. 1 sur EM équipés)</li>
+          <li>Ne pas utiliser les crans de shuntage en zone givrée</li>
+        </ul>
+      </div>
+
+      <div class="cas-block">
+        <div class="pave pave-blue">Locomotive(s) sous 25 000 V — disjonctions fréquentes</div>
+        <ul class="pave-actions">
+          <li>Limiter la vitesse à <span class="val val-amber">60 km/h</span></li>
+          <li>Lever les deux pantos si loco équipée (sauf prescriptions contraires MC)</li>
+          <li>En UM/DT : utilisation simultanée des 2 pantos sur les engins — <span style="color:#fca5a5;font-weight:800;">INTERDITE</span></li>
+        </ul>
+      </div>
+
+      <div class="cas-block">
+        <div class="pave pave-green">Reprise de la marche normale</div>
+        <ul class="pave-actions">
+          <li>Après franchissement de la zone signalée (par avis ou extinction du tableau GIVRE)</li>
+          <li>En l'absence d'indice de mauvais captage</li>
+        </ul>
+      </div>
+
+    </div>
+  </div><!-- /F421 -->
+
+  <!-- F422 -->
+  <div class="section sec-circ collapsed" id="sec-f422">
+    <div class="section-header" onclick="tog('sec-f422')">
+      <div class="sh-left">
+        <div class="sh-title">Mauvais captage 1 500 V — Forte chaleur ou vent violent</div>
+        <div class="sh-sub">F 422 · Actions immédiates</div>
+      </div>
+      <div class="sh-right"><span class="chevron">▼</span></div>
+    </div>
+    <div class="section-body">
+
+      <div class="cas-block">
+        <div class="pave pave-blue">Locomotives monocourant à 2 pantos reliés électriquement</div>
+        <ul class="pave-actions">
+          <li>Abaisser le panto en service et lever l'autre</li>
+        </ul>
+      </div>
+
+      <div class="cas-block">
+        <div class="pave pave-green">→ Le captage est satisfaisant</div>
+        <ul class="pave-actions">
+          <li>Continuer la remorque dans ces conditions</li>
+          <li>Reprendre la marche normale dès que possible</li>
+        </ul>
+      </div>
+
+      <div class="cas-block">
+        <div class="pave pave-amber">→ Le captage n'est pas satisfaisant</div>
+        <ul class="pave-actions">
+          <li>Baisser le panto · Lever le panto initialement en service</li>
+          <li>Abaisser la vitesse jusqu'au moment où le captage redevient satisfaisant</li>
+          <li>Aviser SGC par radio — à défaut téléphoner au 1er arrêt</li>
+          <li>S'assurer tous les <span class="val val-amber">10 km</span> de la qualité du captage en augmentant la vitesse du train</li>
+        </ul>
+      </div>
+
+      <div class="cas-block">
+        <div class="pave pave-teal">Autres EM</div>
+        <ul class="pave-actions">
+          <li>Abaisser la vitesse jusqu'au moment où le captage redevient satisfaisant</li>
+          <li>Aviser SGC par radio — à défaut téléphoner au 1er arrêt</li>
+          <li>S'assurer tous les <span class="val val-amber">10 km</span> de la qualité du captage en augmentant la vitesse du train</li>
+        </ul>
+      </div>
+
+      <div class="cas-block">
+        <div class="pave pave-green">Si le captage redevient satisfaisant</div>
+        <ul class="pave-actions">
+          <li>Reprendre la marche normale</li>
+        </ul>
+      </div>
+
+    </div>
+  </div><!-- /F422 -->
+
+</div><!-- /subcat-body intemperies -->
+```
+
+  </div><!-- /subcat intemperies -->
+
+  <!-- ── SOUS-CAT : ÉQUIPEMENTS FIXES ── -->
+
+  <div class="subcat sc-collapsed" id="sc-equipfixes">
+    <div class="subcat-header" onclick="togSC('sc-equipfixes')">
+      <div class="subcat-title"><span class="sc-icon">🏗️</span>Équipements fixes</div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="subcat-count">F 431 · F 432 · F 433</span>
+        <span class="sc-chevron">▼</span>
+      </div>
+    </div>
+    <div class="subcat-body">
+
+```
+  <!-- F431 -->
+  <div class="section sec-circ collapsed" id="sec-f431">
+    <div class="section-header" onclick="tog('sec-f431')">
+      <div class="sh-left">
+        <div class="sh-title">Incident dans un tunnel à mauvaise aération</div>
+        <div class="sh-sub">F 431 · Actions immédiates</div>
+      </div>
+      <div class="sh-right"><span class="chevron">▼</span></div>
+    </div>
+    <div class="section-body">
+      <div class="proc-note"><span class="w">⚠</span> Arrêt accidentel dans un tunnel à mauvaise aération d'un train produisant des gaz d'échappement — Le train ne peut être remis en marche dans un délai très court</div>
+
+      <div class="cas-block">
+        <div class="pave pave-blue">Tunnel dont l'entrée est repérée par la pancarte et aucune DDS n'est formulée &nbsp;<span style="font-size:18px;">↩</span></div>
+        <ul class="pave-actions">
+          <li>Refouler le train, sans agent à l'avant, jusqu'à l'air libre</li>
+          <li>Opérer avec les plus grandes précautions</li>
+        </ul>
+      </div>
+
+      <div class="cas-block">
+        <div class="pave pave-blue">Tunnel dont l'entrée n'est pas repérée par la pancarte et/ou DDS</div>
+        <ul class="pave-actions">
+          <li>Arrêter, si possible, le (les) moteur(s) Diesel</li>
+          <li>Appliquer <span class="fref">F 010</span></li>
+          <li>Immobiliser le train</li>
+        </ul>
+      </div>
+
+      <div class="cas-block">
+        <div class="pave pave-red">S'il y a danger ou gêne respiratoire inacceptable</div>
+        <ul class="pave-actions">
+          <li>Conduire le personnel le plus rapidement possible à l'air libre <strong>en s'assurant de sa sécurité</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div><!-- /F431 -->
+
+  <!-- F432 -->
+  <div class="section sec-circ collapsed" id="sec-f432">
+    <div class="section-header" onclick="tog('sec-f432')">
+      <div class="sh-left">
+        <div class="sh-title">PN ouvert ou barrières brisées / aspect anormal — Double voie</div>
+        <div class="sh-sub">F 432 · Actions immédiates</div>
+      </div>
+      <div class="sh-right"><span class="chevron">▼</span></div>
+    </div>
+    <div class="section-body">
+      <div class="ai-block">
+        <div class="ai-label">⚡ Actions immédiates</div>
+        <ol class="action-list">
+          <li>Siffler</li>
+          <li>SAR</li>
+          <li>SAL</li>
+          <li><strong>Tenter</strong> de s'arrêter avant le PN</li>
+        </ol>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-amber">Si impossible</div>
+        <ul class="pave-actions">
+          <li>Se mettre en mesure de s'arrêter à la DCO</li>
+        </ul>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-green">Si barrières remplacées par un dispositif de secours</div>
+        <ul class="pave-actions">
+          <li>Cesser SAR et SAL</li>
+          <li>Si à l'arrêt → <span class="fref">F 490</span></li>
+        </ul>
+      </div>
+    </div>
+  </div><!-- /F432 -->
+
+  <!-- F433 -->
+  <div class="section sec-circ collapsed" id="sec-f433">
+    <div class="section-header" onclick="tog('sec-f433')">
+      <div class="sh-left">
+        <div class="sh-title">PN ouvert ou barrières brisées / aspect anormal — Voie banalisée</div>
+        <div class="sh-sub">F 433 · Actions immédiates</div>
+      </div>
+      <div class="sh-right"><span class="chevron">▼</span></div>
+    </div>
+    <div class="section-body">
+      <div class="ai-block">
+        <div class="ai-label">⚡ Actions immédiates</div>
+        <ol class="action-list">
+          <li>Siffler</li>
+          <li><strong>Tenter</strong> de s'arrêter avant le PN</li>
+        </ol>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-amber">Si impossible — ligne à une voie banalisée</div>
+        <ul class="pave-actions">
+          <li>S'arrêter</li>
+        </ul>
+      </div>
+    </div>
+  </div><!-- /F433 -->
+
+</div><!-- /subcat-body equipfixes -->
+```
+
+  </div><!-- /subcat equipfixes -->
+
+  <!-- ── SOUS-CAT : INCIDENT AU TRAIN OU À LA VOIE ── -->
+
+  <div class="subcat sc-collapsed" id="sc-incident">
+    <div class="subcat-header" onclick="togSC('sc-incident')">
+      <div class="subcat-title"><span class="sc-icon">🚨</span>Incident au train ou à la voie</div>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <span class="subcat-count">F 437–448 · F 450 · F 455</span>
+        <span class="sc-chevron">▼</span>
+      </div>
+    </div>
+    <div class="subcat-body">
+
+```
+  <!-- F437 -->
+  <div class="section sec-circ collapsed" id="sec-f437">
+    <div class="section-header" onclick="tog('sec-f437')">
+      <div class="sh-left">
+        <div class="sh-title">Perception du SAL</div>
+        <div class="sh-sub">F 437 · Actions immédiates</div>
+      </div>
+      <div class="sh-right"><span class="chevron">▼</span></div>
+    </div>
+    <div class="section-body">
+      <div class="ai-block">
+        <div class="ai-label">⚡ Actions immédiates</div>
+        <ol class="action-list">
+          <li><strong>S'arrêter d'urgence</strong></li>
+          <li><strong>Émettre le SAL</strong> — uniquement sur ligne équipée radio GSM-R</li>
+          <li>Se tenir prêt à baisser le (les) pantographe(s)</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- F438 -->
+  <div class="section sec-circ collapsed" id="sec-f438">
+    <div class="section-header" onclick="tog('sec-f438')">
+      <div class="sh-left">
+        <div class="sh-title">Perception du SAR</div>
+        <div class="sh-sub">F 438 · Actions immédiates</div>
+      </div>
+      <div class="sh-right"><span class="chevron">▼</span></div>
+    </div>
+    <div class="section-body">
+      <div class="ai-block">
+        <div class="ai-label">⚡ Actions immédiates</div>
+        <ol class="action-list">
+          <li><strong>Serrer d'urgence</strong> (sauf si la vitesse permet déjà de respecter la marche à vue)</li>
+          <li>Se mettre aussitôt que possible en marche à vue</li>
+          <li>Se tenir prêt à baisser le (les) pantographe(s)</li>
+          <li>Porter attention à son environnement et aux communications radio</li>
+          <li>Observer un silence radio</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- F439 -->
+  <div class="section sec-circ collapsed" id="sec-f439">
+    <div class="section-header" onclick="tog('sec-f439')">
+      <div class="sh-left">
+        <div class="sh-title">Perception de la lueur d'une torche à flamme rouge</div>
+        <div class="sh-sub">F 439 · Actions immédiates</div>
+      </div>
+      <div class="sh-right"><span class="chevron">▼</span></div>
+    </div>
+    <div class="section-body">
+      <div class="ai-block">
+        <div class="ai-label">⚡ Actions immédiates</div>
+        <ol class="action-list">
+          <li><strong>S'arrêter d'urgence</strong></li>
+          <li>Se tenir prêt à baisser le (les) pantographe(s)</li>
+        </ol>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-red">Si torche ou lueur perçue au franchissement ou aux abords d'une zone de limitation ≤ 50 km/h signalisée par un TIV</div>
+        <ul class="pave-actions">
+          <li>Appliquer <span class="fref">F 447</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- F441 -->
+  <div class="section sec-circ collapsed" id="sec-f441">
+    <div class="section-header" onclick="tog('sec-f441')">
+      <div class="sh-left">
+        <div class="sh-title">Détonation d'un ou plusieurs pétards isolés</div>
+        <div class="sh-sub">F 441 · Actions immédiates</div>
+      </div>
+      <div class="sh-right"><span class="chevron">▼</span></div>
+    </div>
+    <div class="section-body">
+      <div class="ai-block">
+        <div class="ai-label">⚡ Actions immédiates</div>
+        <ol class="action-list">
+          <li><strong>S'arrêter d'urgence</strong></li>
+          <li>Se tenir prêt à baisser le(s) pantographe(s)</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- F443 -->
+  <div class="section sec-circ collapsed" id="sec-f443">
+    <div class="section-header" onclick="tog('sec-f443')">
+      <div class="sh-left">
+        <div class="sh-title">Train circulant dans des conditions dangereuses</div>
+        <div class="sh-sub">F 443 · Actions immédiates</div>
+      </div>
+      <div class="sh-right"><span class="chevron">▼</span></div>
+    </div>
+    <div class="section-body">
+      <div class="proc-note"><span class="w">⚠</span> Concerne un train <strong>autre que le sien</strong> — Pour son propre train : appliquer la fiche correspondant à l'anomalie</div>
+      <div class="ai-block">
+        <div class="ai-label">⚡ Actions immédiates</div>
+        <ol class="action-list">
+          <li>Arrêter ou faire arrêter d'urgence le train</li>
+        </ol>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-red">Si l'anomalie risque de compromettre la sécurité des circulations</div>
+        <ul class="pave-actions">
+          <li>Arrêter ou faire arrêter ces circulations</li>
+        </ul>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-amber">Si ce train a provoqué ou risque de provoquer une anomalie (choc, avarie voie…)</div>
+        <ul class="pave-actions">
+          <li>Appliquer la fiche correspondante</li>
+        </ul>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-blue">Dans tous les cas</div>
+        <ul class="pave-actions">
+          <li>Aviser SGC par radio — à défaut téléphoner après arrêt au 1er endroit favorable ou 1er poste/gare rencontré</li>
+          <li>Si à l'arrêt → <span class="fref">F 490</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- F444 -->
+  <div class="section sec-circ collapsed" id="sec-f444">
+    <div class="section-header" onclick="tog('sec-f444')">
+      <div class="sh-left">
+        <div class="sh-title">Dangers liés au comportement des personnes</div>
+        <div class="sh-sub">F 444 · Actions immédiates</div>
+      </div>
+      <div class="sh-right"><span class="chevron">▼</span></div>
+    </div>
+    <div class="section-body">
+
+      <div class="common-block">
+        <div class="common-label">Actions communes à tous les cas</div>
+        <ul class="pave-actions" style="background:none; border-left:none; padding:0;">
+          <li>Siffler</li>
+          <li>Aviser SGC par radio — à défaut téléphoner après arrêt au 1er endroit favorable (1er poste ou gare rencontré)</li>
+          <li>Si à l'arrêt → <span class="fref">F 490</span></li>
+        </ul>
+      </div>
+
+      <div class="proc-note"><span class="w">📌</span> L'arrêt de l'émission du SAR ne peut se faire qu'après avoir reçu en phonie l'autorisation d'un agent du SGC</div>
+
+      <!-- CAS 1 -->
+      <div class="cas-block">
+        <div class="pave pave-blue">Personne(s) dans la zone dangereuse (ZD) — sur sa voie de circulation</div>
+        <ul class="pave-actions">
+          <li>S'arrêter d'urgence</li>
+          <li>SAR + SAL (sauf voie de service)</li>
+          <li>Se conformer aux instructions</li>
+        </ul>
+      </div>
+
+      <!-- CAS 2 -->
+      <div class="cas-block">
+        <div class="pave pave-blue">Personne(s) dans la ZD — pas sur sa voie de circulation</div>
+        <ul class="pave-actions">
+          <li>SAR + SAL (sauf voie de service)</li>
+          <li>Réduire la vitesse</li>
+          <li>Se mettre en marche à vue et la poursuivre tant que les instructions SGC ne sont pas reçues</li>
+          <li>Cesser le SAL</li>
+        </ul>
+      </div>
+
+      <!-- CAS 3 -->
+      <div class="cas-block">
+        <div class="pave pave-blue">Personne(s) ou voyageurs pas dans la ZD</div>
+        <ul class="pave-actions">
+          <li>Se conformer aux instructions SGC</li>
+        </ul>
+      </div>
+
+      <!-- CAS 4 -->
+      <div class="cas-block">
+        <div class="pave pave-red">Voyageurs descendus d'un train côté entresvoie</div>
+        <ul class="pave-actions">
+          <li>S'arrêter d'urgence</li>
+          <li>SAR + SAL</li>
+          <li>Si pas l'assurance que la protection est réalisée → protéger ou faire protéger les voyageurs comme un obstacle (<span class="fref">F 442</span>)</li>
+          <li>S'il ne s'y oppose, repartir en marche à vue et la poursuivre tant que les instructions SGC ne sont pas reçues — à défaut téléphoner après arrêt</li>
+          <li>Cesser le SAL</li>
+        </ul>
+      </div>
+
+      <!-- CAS 5 -->
+      <div class="cas-block">
+        <div class="pave pave-amber">Personne en situation de danger sur un train en marche — Son train</div>
+        <ul class="pave-actions">
+          <li>S'arrêter</li>
+          <li>Visiter le train</li>
+          <li>Aviser le SGC lorsque le danger a disparu</li>
+        </ul>
+      </div>
+
+      <!-- CAS 6 -->
+      <div class="cas-block">
+        <div class="pave pave-amber">Personne en situation de danger sur un train en marche — Autre train</div>
+        <ul class="pave-actions">
+          <li>Prendre ou faire prendre les mesures pour arrêter le train concerné</li>
+          <li>Préciser la nature du danger et les informations utiles</li>
+        </ul>
+      </div>
+
+      <!-- CAS 7 -->
+      <div class="cas-block">
+        <div class="pave pave-red">Comportement malveillant — Voies voisines concernées</div>
+        <ul class="pave-actions">
+          <li>SAR + SAL (sauf voie de service)</li>
+          <li>Réduire la vitesse</li>
+          <li>Se mettre en marche à vue et la poursuivre tant que les instructions SGC ne sont pas reçues</li>
+          <li>Cesser le SAL</li>
+        </ul>
+      </div>
+
+      <!-- CAS 8 -->
+      <div class="cas-block">
+        <div class="pave pave-red">Sécurité de sa circulation compromise ou risque de l'être</div>
+        <ul class="pave-actions">
+          <li>S'arrêter d'urgence</li>
+          <li>Se conformer aux instructions</li>
+        </ul>
+      </div>
+
+      <!-- CAS 9 -->
+      <div class="cas-block">
+        <div class="pave pave-amber">Comportement semblant malveillant</div>
+        <ul class="pave-actions">
+          <li>Siffler si nécessaire</li>
+        </ul>
+      </div>
+
+    </div>
+  </div><!-- /F444 -->
+
+  <!-- F442 -->
+  <div class="section sec-circ collapsed" id="sec-f442">
+    <div class="section-header" onclick="tog('sec-f442')">
+      <div class="sh-left"><div class="sh-title">Obstacle ou danger pour les circulations</div><div class="sh-sub">F 442 · Actions immédiates</div></div>
+      <div class="sh-right"><span class="chevron">▼</span></div>
+    </div>
+    <div class="section-body">
+      <div class="ai-block">
+        <div class="ai-label">⚡ Actions immédiates</div>
+        <ol class="action-list">
+          <li>S'arrêter d'urgence</li>
+          <li>Émettre le SAR</li>
+          <li>Émettre le SAL</li>
+          <li><strong>Ordonner</strong> à un agent du SGC d'assurer la protection de l'obstacle</li>
+        </ol>
+      </div>
+      <div class="proc-note"><span class="w">⚠</span> Obstacle ou danger sur voie de service → Aviser un agent sédentaire</div>
+    </div>
+  </div>
+
+  <!-- F445 -->
+  <div class="section sec-circ collapsed" id="sec-f445">
+    <div class="section-header" onclick="tog('sec-f445')">
+      <div class="sh-left"><div class="sh-title">Dérive</div><div class="sh-sub">F 445</div></div>
+      <div class="sh-right"><span class="chevron">▼</span></div>
+    </div>
+    <div class="section-body">
+      <div class="cas-block">
+        <div class="pave pave-amber">Si dérive de son propre train</div>
+        <ul class="pave-actions"><li>Appliquer <span class="fref">F 210</span></li></ul>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-blue">La liaison radio fonctionne</div>
+        <ul class="pave-actions">
+          <li><strong>Ne pas émettre le SAR</strong> — utiliser la phonie</li>
+          <li>Aviser SGC (position du train, sens de la dérive, présence voyageurs/MD)</li>
+          <li>Si ordre de circuler en avance sur ligne où cette possibilité n'est pas admise → siffler sur tout le parcours</li>
+        </ul>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-blue">Non fonctionnement de la liaison radio</div>
+        <ul class="pave-actions">
+          <li>Aviser SGC à défaut téléphoner après arrêt au 1er endroit favorable (1er poste ou gare rencontré)</li>
+          <li>Préciser position du train, sens de la dérive, présence voyageurs/MD</li>
+          <li>Si ordre de circuler en avance sur ligne où cette possibilité n'est pas admise → siffler sur tout le parcours</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- F446 -->
+  <div class="section sec-circ collapsed" id="sec-f446">
+    <div class="section-header" onclick="tog('sec-f446')">
+      <div class="sh-left"><div class="sh-title">Présence de bestiaux sur la voie ou à ses abords</div><div class="sh-sub">F 446 · Actions immédiates</div></div>
+      <div class="sh-right"><span class="chevron">▼</span></div>
+    </div>
+    <div class="section-body">
+      <div class="cas-block">
+        <div class="pave pave-red">La présence constitue un obstacle</div>
+        <ul class="pave-actions">
+          <li>Assurer la protection obstacles inopinés → <span class="fref">F 442</span></li>
+          <li>Appliquer <span class="fref">F 490</span></li>
+        </ul>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-blue">La présence ne constitue pas un obstacle</div>
+        <ul class="pave-actions">
+          <li>Aviser SGC en indiquant le PK par radio — à défaut téléphoner après arrêt au 1er endroit favorable</li>
+          <li>Si à l'arrêt → <span class="fref">F 490</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- F447 -->
+  <div class="section sec-circ collapsed" id="sec-f447">
+    <div class="section-header" onclick="tog('sec-f447')">
+      <div class="sh-left"><div class="sh-title">Train déraillé</div><div class="sh-sub">F 447</div></div>
+      <div class="sh-right"><span class="chevron">▼</span></div>
+    </div>
+    <div class="section-body">
+      <div class="cas-block">
+        <div class="pave pave-red">Si danger ou présomption de danger pour une voie voisine</div>
+        <ul class="pave-actions"><li>Appliquer <span class="fref">F 442</span> (protection obstacle)</li></ul>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-amber">Si présence de MD ou matières radioactives dans le train</div>
+        <ul class="pave-actions"><li>Aviser le SGC</li></ul>
+      </div>
+      <div class="proc-note">
+        <span class="w">📌 Le conducteur considère le train déraillé :</span><br>
+        · Dépression CG dans un tunnel ou à ses abords<br>
+        · Sur zone LTV ≤ 50 km/h signalisée par un TIV ou juste après l'avoir franchi<br>
+        · En même temps qu'une mise hors tension de la caténaire
+      </div>
+    </div>
+  </div>
+
+  <!-- F448 -->
+  <div class="section sec-circ collapsed" id="sec-f448">
+    <div class="section-header" onclick="tog('sec-f448')">
+      <div class="sh-left"><div class="sh-title">Rupture d'attelage</div><div class="sh-sub">F 448</div></div>
+      <div class="sh-right"><span class="chevron">▼</span></div>
+    </div>
+    <div class="section-body">
+      <div class="cas-block">
+        <div class="pave pave-red">Si danger ou présomption de danger pour une voie voisine</div>
+        <ul class="pave-actions"><li>Appliquer <span class="fref">F 442</span> (protection obstacle)</li></ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- F450 -->
+  <div class="section sec-circ collapsed" id="sec-f450">
+    <div class="section-header" onclick="tog('sec-f450')">
+      <div class="sh-left"><div class="sh-title">Incendie dans le train</div><div class="sh-sub">F 450 · Actions immédiates</div></div>
+      <div class="sh-right"><span class="chevron">▼</span></div>
+    </div>
+    <div class="section-body">
+      <div class="ai-block">
+        <div class="ai-label">⚡ Actions immédiates</div>
+        <ol class="action-list">
+          <li>S'arrêter — éviter un point où l'incendie risquerait de se propager (souterrain, viaduc, tranchée…) · si possible à proximité d'un téléphone et/ou d'un accès routier</li>
+          <li>Faire interrompre, si nécessaire, les circulations sur la (les) voie(s) adjacente(s)</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- F455 -->
+  <div class="section sec-circ collapsed" id="sec-f455">
+    <div class="section-header" onclick="tog('sec-f455')">
+      <div class="sh-left"><div class="sh-title">Enrayage — Avis d'enrayage</div><div class="sh-sub">F 455 · Actions immédiates</div></div>
+      <div class="sh-right"><span class="chevron">▼</span></div>
+    </div>
+    <div class="section-body">
+      <div class="ai-block">
+        <div class="ai-label">⚡ Enrayage de son train — Actions immédiates</div>
+        <ol class="action-list">
+          <li>Aviser un agent du SGC (type d'enrayage…)</li>
+          <li>Appliquer les prescriptions selon la situation</li>
+        </ol>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-amber">Enrayage important</div>
+        <ul class="pave-actions"><li>Aviser <strong>immédiatement</strong> par radio — à défaut téléphoner après arrêt au 1er endroit favorable (1er poste ou gare rencontré)</li></ul>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-red">Une prescription s'impose</div>
+        <ul class="pave-actions">
+          <li>Ne pas desserrer les freins</li>
+          <li>Laisser agir le dispositif d'anti-enrayage sur les EM équipés</li>
+          <li>Sabler · S'arrêter d'urgence (si nécessaire)</li>
+        </ul>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-blue">Autres cas — EM équipé dispositif anti-enrayage</div>
+        <ul class="pave-actions"><li>Laisser agir le dispositif</li></ul>
+      </div>
+      <div class="cas-block">
+        <div class="pave pave-blue">Autres cas — EM non équipé dispositif anti-enrayage</div>
+        <ul class="pave-actions"><li>Réduire, si possible, l'effort de retenue</li></ul>
+      </div>
+      <div class="inner-label">Réception d'un « avis d'enrayage »</div>
+      <div class="cas-block">
+        <div class="pave pave-teal">Conduite à tenir</div>
+        <ul class="pave-actions">
+          <li>Observer <span class="val val-amber">MA 80</span> sans dépasser <span class="val val-red">50 km/h</span> (ou vitesse prescrite sur l'avis)</li>
+          <li>Anticiper la réduction de vitesse (frein électrique, etc.)</li>
+          <li>Anticiper le freinage pneumatique</li>
+          <li>Sabler par intermittence pendant le freinage sauf dans les zones d'aiguilles</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /subcat-body incident -->
+```
+
+  </div><!-- /subcat incident -->
+
+</div><!-- /circ -->
+
+<!-- ══════════════════════════════════════
+     DISPOSITIFS DE SÉCURITÉ
+══════════════════════════════════════ -->
+
+<div class="tab-panel" id="tab-secu">
+  <div style="padding:30px;text-align:center;color:rgba(255,255,255,0.3);font-family:var(--mono);font-size:12px;letter-spacing:1px;">
+    KVB · RS · DAAT<br><br>À VENIR
+  </div>
+</div>
+
+</main>
+
+<script>
+function tog(id) {
+  document.getElementById(id).classList.toggle('collapsed');
+}
+function showTab(name, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  btn.classList.add('active');
+}
+
+// Navigation par clic sur numéro de fiche
+const FICHE_MAP = {
+  'F 102': { tab:'frein', sec:'sec-f102' },
+  'F 201': { tab:'frein', sec:'sec-f201' },
+  'F 210': { tab:'frein', sec:'sec-f210' },
+  'F 215': { tab:'frein', sec:'sec-f215' },
+  'F 442': { tab:'circ',  sec:'sec-f442', subcat:'sc-incident' },
+  'F 445': { tab:'circ',  sec:'sec-f445', subcat:'sc-incident' },
+  'F 446': { tab:'circ',  sec:'sec-f446', subcat:'sc-incident' },
+  'F 447': { tab:'circ',  sec:'sec-f447', subcat:'sc-incident' },
+  'F 448': { tab:'circ',  sec:'sec-f448', subcat:'sc-incident' },
+  'F 450': { tab:'circ',  sec:'sec-f450', subcat:'sc-incident' },
+  'F 455': { tab:'circ',  sec:'sec-f455', subcat:'sc-incident' },
+  'F 401': { tab:'circ',  sec:'sec-f401', subcat:'sc-elec' },
+  'F 403': { tab:'circ',  sec:'sec-f403', subcat:'sc-elec' },
+  'F 404': { tab:'circ',  sec:'sec-f404', subcat:'sc-elec' },
+  'F 405': { tab:'circ',  sec:'sec-f405', subcat:'sc-elec' },
+  'F 420': { tab:'circ',  sec:'sec-f420', subcat:'sc-intemperies' },
+  'F 421': { tab:'circ',  sec:'sec-f421', subcat:'sc-intemperies' },
+  'F 422': { tab:'circ',  sec:'sec-f422', subcat:'sc-intemperies' },
+  'F 437': { tab:'circ',  sec:'sec-f437', subcat:'sc-incident' },
+  'F 438': { tab:'circ',  sec:'sec-f438', subcat:'sc-incident' },
+  'F 439': { tab:'circ',  sec:'sec-f439', subcat:'sc-incident' },
+  'F 441': { tab:'circ',  sec:'sec-f441', subcat:'sc-incident' },
+  'F 443': { tab:'circ',  sec:'sec-f443', subcat:'sc-incident' },
+  'F 444': { tab:'circ',  sec:'sec-f444', subcat:'sc-incident' },
+  'F 431': { tab:'circ',  sec:'sec-f431', subcat:'sc-equipfixes' },
+  'F 432': { tab:'circ',  sec:'sec-f432', subcat:'sc-equipfixes' },
+  'F 433': { tab:'circ',  sec:'sec-f433', subcat:'sc-equipfixes' },
+  'F 513': { tab:'engin', sec:'sec-f513' },
+  'F 514': { tab:'engin', sec:'sec-f514' },
+  'F 516': { tab:'engin', sec:'sec-f516' },
+  'F 517': { tab:'engin', sec:'sec-f517' },
+};
+document.querySelectorAll('.fref').forEach(el => {
+  const txt = el.textContent.trim();
+  const entry = FICHE_MAP[txt];
+  if (entry) {
+    el.addEventListener('click', e => {
+      e.stopPropagation();
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById('tab-' + entry.tab).classList.add('active');
+      document.querySelectorAll('.tab-btn').forEach(b => {
+        if (b.getAttribute('onclick') && b.getAttribute('onclick').includes("'" + entry.tab + "'")) b.classList.add('active');
+      });
+      // Open subcat if needed
+      if (entry.subcat) {
+        document.getElementById(entry.subcat).classList.remove('sc-collapsed');
+      }
+      const sec = document.getElementById(entry.sec);
+      if (sec) {
+        sec.classList.remove('collapsed');
+        setTimeout(() => sec.scrollIntoView({ behavior:'smooth', block:'start' }), 100);
+      }
+    });
+  }
+});
+
+function togSC(id) {
+  document.getElementById(id).classList.toggle('sc-collapsed');
+}
+
+const sondHist = [];
+function go(stepId, fromId) {
+  if (fromId) sondHist.push(fromId);
+  document.querySelectorAll('.sond-step').forEach(s => s.classList.remove('active'));
+  document.getElementById(stepId).classList.add('active');
+  document.getElementById('sondage-wrap').scrollIntoView({ behavior:'smooth', block:'nearest' });
+}
+function back() {
+  if (!sondHist.length) return;
+  const prev = sondHist.pop();
+  document.querySelectorAll('.sond-step').forEach(s => s.classList.remove('active'));
+  document.getElementById(prev).classList.add('active');
+}
+function resetSondage() {
+  sondHist.length = 0;
+  document.querySelectorAll('.sond-step').forEach(s => s.classList.remove('active'));
+  document.getElementById('step-0').classList.add('active');
+}
+</script>
+
+</body>
+</html>
