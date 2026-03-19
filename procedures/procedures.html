@@ -138,17 +138,17 @@ border-top:1px solid rgba(255,255,255,0.07);
 .cas-block { padding:10px 16px 12px; border-bottom:1px solid rgba(255,255,255,0.06); }
 .cas-block:last-child { border-bottom:none; }
 .pave { border-radius:8px 8px 0 0; padding:8px 12px; font-size:13px; font-weight:700; margin-bottom:0; line-height:1.3; }
-.pave-blue  { background:var(–mem-blue-l);           border-left:3px solid var(–mem-blue); color:#7ec8f4; }
-.pave-teal  { background:rgba(26,154,138,0.18);       border-left:3px solid #1a9a8a;         color:#6dddd1; }
-.pave-amber { background:rgba(255,159,10,0.14);       border-left:3px solid var(–amber);    color:#ffc966; }
-.pave-green { background:rgba(45,164,79,0.14);        border-left:3px solid var(–green);    color:#7fe89a; }
-.pave-red   { background:rgba(255,69,58,0.14);        border-left:3px solid var(–red);      color:#ff9999; }
+.pave-blue  { background:rgba(30,111,168,0.30);        border-left:3px solid #1e6fa8;         color:#7ec8f4; }
+.pave-teal  { background:rgba(26,154,138,0.28);        border-left:3px solid #1a9a8a;         color:#6dddd1; }
+.pave-amber { background:rgba(255,159,10,0.25);        border-left:3px solid #ff9f0a;         color:#ffc966; }
+.pave-green { background:rgba(45,164,79,0.25);         border-left:3px solid #2da84f;         color:#7fe89a; }
+.pave-red   { background:rgba(255,69,58,0.25);         border-left:3px solid #ff453a;         color:#ff9999; }
 .pave-actions {
 background:rgba(255,255,255,0.02);
 border-left:3px solid rgba(255,255,255,0.12);
 border-radius:0 0 8px 8px; padding:8px 12px 10px;
+counter-reset:pa;
 }
-.pave-actions { counter-reset:pa; }
 .pave-actions li {
 display:flex; align-items:flex-start; gap:8px;
 padding:5px 0; font-size:14px; color:#fff; line-height:1.45;
@@ -335,7 +335,7 @@ color: rgba(255,255,255,0.45); margin-bottom: 8px;
 
 <header>
   <div class="header-row">
-    <a href="../index.html" style="font-family:var(--mono);font-size:14px;font-weight:800;color:#fff;text-decoration:none;padding:6px 0;flex-shrink:0;">‹ Accueil</a>
+    <button onclick="window.location.href='../index.html'" style="font-family:var(--mono);font-size:14px;font-weight:800;color:#fff;background:none;border:none;padding:6px 0;cursor:pointer;flex-shrink:0;">‹ Accueil</button>
     <div style="width:1px;height:16px;background:rgba(255,255,255,0.15);flex-shrink:0;margin:0 4px;"></div>
     <div>
       <h1>Procédures</h1>
