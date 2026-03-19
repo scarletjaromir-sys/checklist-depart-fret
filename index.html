@@ -17,12 +17,13 @@
   --mono: ui-monospace,'SF Mono',Menlo,monospace;
   --sans: -apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif;
 }
-html { background-color:#1c1c1e; min-height:100%; }
+html, body {
+  background-color:#1c1c1e !important;
+  background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='0.4' stroke-opacity='0.06'%3E%3Cpath d='M0 60L60 0M-10 10L10 -10M50 70L70 50'/%3E%3C/g%3E%3C/svg%3E") !important;
+  background-size:60px 60px !important;
+}
 body {
   font-family:var(--sans); color:#fff; min-height:100dvh;
-  background-color:#1c1c1e;
-  background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='0.4' stroke-opacity='0.06'%3E%3Cpath d='M0 60L60 0M-10 10L10 -10M50 70L70 50'/%3E%3C/g%3E%3C/svg%3E");
-  background-size:60px 60px;
   display:flex; flex-direction:column;
   padding:env(safe-area-inset-top,20px) 0 env(safe-area-inset-bottom,20px);
 }
@@ -91,12 +92,10 @@ pointer-events:none;
 background:linear-gradient(135deg,rgba(255,255,255,0.28) 0%,rgba(255,255,255,0.10) 18%,transparent 40%);
 }
 .card-depart {
-background:rgba(255,255,255,0.04);
-background-image:linear-gradient(170deg,rgba(20,60,180,0.25) 0%,rgba(20,60,180,0) 60%);
+background:linear-gradient(170deg,rgba(20,60,180,0.35) 0%,rgba(20,60,180,0.08) 60%), rgba(255,255,255,0.06);
 }
 .card-proc {
-background:rgba(255,255,255,0.04);
-background-image:linear-gradient(170deg,rgba(255,69,58,0.2) 0%,rgba(255,69,58,0) 60%);
+background:linear-gradient(170deg,rgba(255,69,58,0.3) 0%,rgba(255,69,58,0.06) 60%), rgba(255,255,255,0.06);
 }
 .mc-icon { font-size:32px; margin-bottom:10px; display:block; filter:drop-shadow(0 2px 8px rgba(0,0,0,0.4)); }
 .mc-badge {
@@ -135,7 +134,7 @@ color:rgba(255,255,255,0.55);
 
 <div class="home-cards">
 
-  <a class="menu-card card-depart" href="checklist.html">
+  <a class="menu-card card-depart" href="checklist/checklist.html">
     <span class="mc-icon">🚂</span>
     <div class="mc-badge badge-depart">CHECKLIST</div>
     <div class="mc-title">Départ Train</div>
@@ -153,7 +152,7 @@ color:rgba(255,255,255,0.55);
     <span class="mc-arrow">›</span>
   </a>
 
-  <a class="menu-card card-proc" href="https://scarletjaromir-sys.github.io/procedures-hexafret">
+  <a class="menu-card card-proc" href="procedures/procedures.html">
     <span class="mc-icon">📋</span>
     <div class="mc-badge badge-proc">PROCÉDURES</div>
     <div class="mc-title">Actions immédiates</div>
