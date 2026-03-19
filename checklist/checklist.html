@@ -95,18 +95,18 @@ button.menu-card::before { content:’’; position:absolute; inset:0; border-ra
 .minute-text span { font-size:11px; color:rgba(255,255,255,0.75); line-height:1.4; }
 .cl-section { margin:10px 16px 0; border-radius:16px; overflow:hidden; transition:transform .25s ease,box-shadow .25s ease; }
 .cl-section:hover { transform:translateY(-3px) scale(1.005); box-shadow:0 16px 48px rgba(0,0,0,0.6),0 0 0 1px rgba(255,255,255,0.12); }
-.cl-section-header { display:flex; align-items:center; justify-content:space-between; padding:13px 16px; cursor:pointer; user-select:none; border-radius:16px; background:#2a2a2e; border:1px solid rgba(255,255,255,0.18); transition:box-shadow .25s ease; position:relative; }
+.cl-section-header { display:flex; align-items:center; justify-content:space-between; padding:13px 16px; cursor:pointer; user-select:none; border-radius:16px; background:rgba(255,255,255,0.04); border:1px solid rgba(255,255,255,0.18); transition:box-shadow .25s ease; position:relative; }
 .cl-section:not(.collapsed) .cl-section-header { border-radius:16px 16px 0 0; border-bottom-color:rgba(255,255,255,0.08); }
 .cl-section-header::before { content:’’; position:absolute; inset:0; border-radius:inherit; pointer-events:none; }
-.sec-ps   .cl-section-header::before { background:linear-gradient(170deg,rgba(30,58,138,0.6) 0%,transparent 80%); }
-.sec-prep .cl-section-header::before { background:linear-gradient(170deg,rgba(29,78,216,0.5) 0%,transparent 80%); }
-.sec-brief .cl-section-header::before { background:linear-gradient(170deg,rgba(37,99,235,0.5) 0%,transparent 80%); }
-.sec-bf   .cl-section-header::before { background:linear-gradient(170deg,rgba(59,130,246,0.5) 0%,transparent 80%); }
-.sec-ppe-b .cl-section-header::before { background:linear-gradient(170deg,rgba(96,165,250,0.4) 0%,transparent 80%); }
-.sec-ppe-s .cl-section-header::before { background:linear-gradient(170deg,rgba(125,211,252,0.35) 0%,transparent 80%); }
-.sec-par  .cl-section-header::before { background:linear-gradient(170deg,rgba(56,189,248,0.35) 0%,transparent 80%); }
-.sec-aum  .cl-section-header::before { background:linear-gradient(170deg,rgba(14,165,233,0.35) 0%,transparent 80%); }
-.sec-hd   .cl-section-header::before { background:linear-gradient(170deg,rgba(6,182,212,0.35) 0%,transparent 80%); }
+.sec-ps   .cl-section-header { background:rgba(255,255,255,0.04); background-image:linear-gradient(170deg,rgba(30,58,138,0.5) 0%,rgba(30,58,138,0) 60%); }
+.sec-prep .cl-section-header { background:rgba(255,255,255,0.04); background-image:linear-gradient(170deg,rgba(29,78,216,0.5) 0%,rgba(29,78,216,0) 60%); }
+.sec-brief .cl-section-header { background:rgba(255,255,255,0.04); background-image:linear-gradient(170deg,rgba(37,99,235,0.5) 0%,rgba(37,99,235,0) 60%); }
+.sec-bf   .cl-section-header { background:rgba(255,255,255,0.04); background-image:linear-gradient(170deg,rgba(59,130,246,0.5) 0%,rgba(59,130,246,0) 60%); }
+.sec-ppe-b .cl-section-header { background:rgba(255,255,255,0.04); background-image:linear-gradient(170deg,rgba(96,165,250,0.4) 0%,rgba(96,165,250,0) 60%); }
+.sec-ppe-s .cl-section-header { background:rgba(255,255,255,0.04); background-image:linear-gradient(170deg,rgba(125,211,252,0.35) 0%,rgba(125,211,252,0) 60%); }
+.sec-par  .cl-section-header { background:rgba(255,255,255,0.04); background-image:linear-gradient(170deg,rgba(56,189,248,0.35) 0%,rgba(56,189,248,0) 60%); }
+.sec-aum  .cl-section-header { background:rgba(255,255,255,0.04); background-image:linear-gradient(170deg,rgba(14,165,233,0.35) 0%,rgba(14,165,233,0) 60%); }
+.sec-hd   .cl-section-header { background:rgba(255,255,255,0.04); background-image:linear-gradient(170deg,rgba(6,182,212,0.35) 0%,rgba(6,182,212,0) 60%); }
 .cl-section-header::after { content:’’; position:absolute; inset:0; border-radius:inherit; pointer-events:none; background:linear-gradient(135deg,rgba(255,255,255,0.30) 0%,rgba(255,255,255,0.12) 18%,rgba(255,255,255,0) 40%),linear-gradient(270deg,rgba(255,255,255,0.08) 0%,transparent 40%),linear-gradient(0deg,rgba(255,255,255,0.06) 0%,transparent 30%); z-index:0; }
 .cl-section-body { background:#222224; border:1px solid rgba(255,255,255,0.12); border-top:none; border-radius:0 0 16px 16px; }
 .cl-section.collapsed .cl-section-body { display:none; }
