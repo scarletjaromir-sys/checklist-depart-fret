@@ -98,15 +98,15 @@ button.menu-card::before { content:’’; position:absolute; inset:0; border-ra
 .cl-section-header { display:flex; align-items:center; justify-content:space-between; padding:13px 16px; cursor:pointer; user-select:none; border-radius:16px; background:rgba(255,255,255,0.03); -webkit-backdrop-filter:blur(30px) saturate(200%); backdrop-filter:blur(30px) saturate(200%); border:1px solid rgba(255,255,255,0.22); box-shadow:inset 0 0 12px rgba(255,255,255,0.15),inset 0 1px 0 rgba(255,255,255,0.18),0 8px 24px rgba(0,0,0,0.4); transition:box-shadow .25s ease; position:relative; }
 .cl-section:not(.collapsed) .cl-section-header { border-radius:16px 16px 0 0; border-bottom-color:rgba(255,255,255,0.08); }
 .cl-section-header::before { content:’’; position:absolute; inset:0; border-radius:inherit; pointer-events:none; }
-.sec-ps   .cl-section-header::before { background:linear-gradient(135deg,rgba(255,255,255,0.18) 0%,rgba(255,255,255,0) 35%),linear-gradient(170deg,rgba(20,60,180,0.18) 0%,rgba(20,60,180,0) 70%); }
-.sec-prep .cl-section-header::before { background:linear-gradient(135deg,rgba(255,255,255,0.16) 0%,rgba(255,255,255,0) 35%),linear-gradient(170deg,rgba(25,75,190,0.16) 0%,rgba(25,75,190,0) 70%); }
-.sec-brief .cl-section-header::before { background:linear-gradient(135deg,rgba(255,255,255,0.15) 0%,rgba(255,255,255,0) 35%),linear-gradient(170deg,rgba(30,95,200,0.14) 0%,rgba(30,95,200,0) 70%); }
-.sec-bf   .cl-section-header::before { background:linear-gradient(135deg,rgba(255,255,255,0.15) 0%,rgba(255,255,255,0) 35%),linear-gradient(170deg,rgba(35,115,205,0.13) 0%,rgba(35,115,205,0) 70%); }
-.sec-ppe-b .cl-section-header::before { background:linear-gradient(135deg,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0) 35%),linear-gradient(170deg,rgba(40,135,210,0.12) 0%,rgba(40,135,210,0) 70%); }
-.sec-ppe-s .cl-section-header::before { background:linear-gradient(135deg,rgba(255,255,255,0.14) 0%,rgba(255,255,255,0) 35%),linear-gradient(170deg,rgba(45,155,215,0.12) 0%,rgba(45,155,215,0) 70%); }
-.sec-par  .cl-section-header::before { background:linear-gradient(135deg,rgba(255,255,255,0.13) 0%,rgba(255,255,255,0) 35%),linear-gradient(170deg,rgba(50,175,220,0.11) 0%,rgba(50,175,220,0) 70%); }
-.sec-aum  .cl-section-header::before { background:linear-gradient(135deg,rgba(255,255,255,0.13) 0%,rgba(255,255,255,0) 35%),linear-gradient(170deg,rgba(55,190,225,0.10) 0%,rgba(55,190,225,0) 70%); }
-.sec-hd   .cl-section-header::before { background:linear-gradient(135deg,rgba(255,255,255,0.12) 0%,rgba(255,255,255,0) 35%),linear-gradient(170deg,rgba(60,205,235,0.09) 0%,rgba(60,205,235,0) 70%); }
+.sec-ps   .cl-section-header::before { background:linear-gradient(170deg,rgba(20,60,180,0.35) 0%,rgba(20,60,180,0) 70%); }
+.sec-prep .cl-section-header::before { background:linear-gradient(170deg,rgba(25,75,190,0.35) 0%,rgba(25,75,190,0) 70%); }
+.sec-brief .cl-section-header::before { background:linear-gradient(170deg,rgba(30,95,200,0.35) 0%,rgba(30,95,200,0) 70%); }
+.sec-bf   .cl-section-header::before { background:linear-gradient(170deg,rgba(35,115,205,0.35) 0%,rgba(35,115,205,0) 70%); }
+.sec-ppe-b .cl-section-header::before { background:linear-gradient(170deg,rgba(40,135,210,0.35) 0%,rgba(40,135,210,0) 70%); }
+.sec-ppe-s .cl-section-header::before { background:linear-gradient(170deg,rgba(45,155,215,0.35) 0%,rgba(45,155,215,0) 70%); }
+.sec-par  .cl-section-header::before { background:linear-gradient(170deg,rgba(50,175,220,0.35) 0%,rgba(50,175,220,0) 70%); }
+.sec-aum  .cl-section-header::before { background:linear-gradient(170deg,rgba(55,190,225,0.35) 0%,rgba(55,190,225,0) 70%); }
+.sec-hd   .cl-section-header::before { background:linear-gradient(170deg,rgba(60,205,235,0.35) 0%,rgba(60,205,235,0) 70%); }
 .cl-section-header::after { content:’’; position:absolute; inset:0; border-radius:inherit; pointer-events:none; background:linear-gradient(135deg,rgba(255,255,255,0.30) 0%,rgba(255,255,255,0.12) 18%,rgba(255,255,255,0) 40%),linear-gradient(270deg,rgba(255,255,255,0.08) 0%,transparent 40%),linear-gradient(0deg,rgba(255,255,255,0.06) 0%,transparent 30%); z-index:0; }
 .cl-section-body { background:rgba(255,255,255,0.02); -webkit-backdrop-filter:blur(30px) saturate(180%); backdrop-filter:blur(30px) saturate(180%); border:1px solid rgba(255,255,255,0.16); border-top:none; border-radius:0 0 16px 16px; box-shadow:inset 1px 0 0 rgba(255,255,255,0.1),inset -1px 0 0 rgba(255,255,255,0.05),inset 0 -2px 0 rgba(255,255,255,0.1),0 10px 28px rgba(0,0,0,0.3); }
 .cl-section.collapsed .cl-section-body { display:none; }
@@ -201,7 +201,7 @@ button.menu-card::before { content:’’; position:absolute; inset:0; border-ra
 
 <header>
   <div style="display:flex;align-items:center;gap:10px;">
-    <a href="../index.html" style="font-family:var(--mono);font-size:11px;font-weight:700;color:rgba(255,255,255,0.7);text-decoration:none;padding:4px 0;">‹ Retour</a>
+    <a href="../index.html" style="font-family:var(--mono);font-size:14px;font-weight:800;color:#fff;text-decoration:none;padding:6px 0;display:flex;align-items:center;gap:4px;">‹ Accueil</a>
     <div style="width:1px;height:16px;background:rgba(255,255,255,0.15);"></div>
     <div class="logo-badge">FRET</div>
     <h1>Départ Train</h1>
