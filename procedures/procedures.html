@@ -969,38 +969,77 @@ color: rgba(255,255,255,0.45); margin-bottom: 8px;
   <div class="section sec-signa collapsed" id="sec-f390">
     <div class="section-header" onclick="tog('sec-f390')"><div class="sh-left"><div class="sh-title">Anomalies de la r&eacute;p&eacute;tition &mdash; Signalisation au sol</div><div class="sh-sub">F 390 &middot; Actions imm&eacute;diates</div></div><div class="sh-right"><span class="chevron">&#9660;</span></div></div>
     <div class="section-body">
-      <div class="proc-note"><span class="w">&#9888;</span> Si absence du "bip" d'attention &rarr; Annoter le carnet de bord</div>
+      <div class="proc-note"><span class="w">&#9888;</span> Si absence du &ldquo;bip&rdquo; d'attention &rarr; Annoter le carnet de bord</div>
 
-      <!-- 1ère anomalie -->
-      <div class="inner-label">1&egrave;re anomalie</div>
-      <div class="cas-block"><div class="pave pave-red">Indication "signal ferm&eacute;" (anomalie isol&eacute;e) : au franchissement d'un signal ouvert / en l'absence de tout signal susceptible d'&ecirc;tre r&eacute;p&eacute;t&eacute; / au franchissement d'un signal rencontr&eacute; &agrave; revers (sauf contresens sur VUT et &agrave; contre-voie si ordre &eacute;crit)</div><ul class="pave-actions">
-        <li>S'arr&ecirc;ter d'urgence</li>
-        <li>Si &agrave; la sortie d'une gare vers ligne &agrave; VU ou voie banalise&eacute;e &rarr; <span class="fref">F 442</span> (protection obstacle)</li>
-        <li>Signaler l'anomalie &rarr; <span class="fref">F 300</span></li>
-        <li>Se conformer aux instructions</li>
-        <li>Franchissement signal de sortie &rarr; recevoir autorisation de franchissement (vaut AuM)</li>
-        <li>Autre cas &rarr; recevoir une AuM</li>
-        <li>Appliquer <span class="fref">F 490</span></li>
-        <li>Redoubler d'attention dans l'observation des signaux</li>
-        <li>Surveiller le fonctionnement de la r&eacute;p&eacute;tition</li>
-      </ul></div>
-      <div class="cas-block"><div class="pave pave-sky">Autre situation (1&egrave;re anomalie)</div><ul class="pave-actions">
-        <li>Signaler l'anomalie &rarr; <span class="fref">F 300</span></li>
-        <li>Appliquer <span class="fref">F 490</span></li>
-        <li>Marcher &agrave; vue sur la DCO &agrave; partir du point d'arr&ecirc;t</li>
-        <li>Redoubler d'attention dans l'observation des signaux</li>
-        <li>Surveiller le fonctionnement de la r&eacute;p&eacute;tition</li>
-      </ul></div>
+      <!-- ══ 1ÈRE ANOMALIE ══ -->
+      <div style="margin:10px 12px 0;padding:7px 12px;background:rgba(30,111,168,0.4);border-left:4px solid #5ac8fa;border-radius:8px 8px 0 0;">
+        <span style="font-family:var(--mono);font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#b3ecff;">&#x25CF; 1&egrave;re anomalie</span>
+      </div>
+      <div style="margin:0 12px 0;background:rgba(30,111,168,0.07);border-left:4px solid #5ac8fa;border-right:1px solid rgba(90,200,250,0.12);padding:6px 12px 2px;">
 
-      <!-- 2ème anomalie -->
-      <div class="inner-label">2&egrave;me anomalie</div>
-      <div class="cas-block"><div class="pave pave-red">2&egrave;me anomalie</div><ul class="pave-actions">
-        <li>Appliquer les prescriptions de la 1&egrave;re anomalie</li>
-        <li>Consid&eacute;rer la r&eacute;p&eacute;tition en d&eacute;rangement</li>
-        <li>Ne plus tenir compte des nouvelles anomalies</li>
-        <li>Continuer d'agiter sur BP(AC)SF</li>
-        <li>Appliquer <span class="fref">F 501</span></li>
-      </ul></div>
+        <!-- S'arrêter d'urgence -->
+        <div class="pave pave-red" style="margin-bottom:8px;">&#x25B6; S'arr&ecirc;ter d'urgence</div>
+
+        <!-- Condition principale — bleu normal -->
+        <div class="pave pave-blue" style="margin-bottom:6px;">Indication &ldquo;signal ferm&eacute;&rdquo; (anomalie isol&eacute;e) &mdash; au franchissement d'un signal ouvert / en l'absence de tout signal susceptible d'&ecirc;tre r&eacute;p&eacute;t&eacute; / au franchissement d'un signal rencontr&eacute; &agrave; revers (sauf contresens VUT / contre-voie si ordre &eacute;crit)</div>
+
+        <!-- Condition principale sortie gare VB -->
+        <div class="pave pave-sky" style="margin-bottom:4px;">&#x25B6; Si &agrave; la sortie d'une gare &mdash; voie banalise&eacute;e ou si le train est dirig&eacute; vers une voie banalise&eacute;e</div>
+        <ul class="pave-actions" style="margin-bottom:8px;">
+          <li><span class="fref">F 442</span> (protection obstacle)</li>
+        </ul>
+
+        <!-- Actions communes -->
+        <ul class="pave-actions" style="margin-bottom:8px;">
+          <li>Signaler l'anomalie &rarr; <span class="fref">F 300</span></li>
+          <li>Se conformer aux instructions</li>
+        </ul>
+
+        <!-- Sous-conditions imbriquées -->
+        <div style="margin:0 0 8px 12px;border-left:2px solid rgba(90,200,250,0.4);padding-left:10px;">
+          <div style="background:rgba(90,200,250,0.12);border-left:2px solid #5ac8fa;border-radius:6px;padding:6px 10px;font-size:13px;font-weight:700;color:#b3ecff;margin-bottom:4px;">&#x2937; Si franchissement d'un signal de sortie</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.85);padding:2px 8px 8px;">&#x2192; Recevoir autorisation de franchissement (vaut AuM)</div>
+          <div style="background:rgba(90,200,250,0.12);border-left:2px solid #5ac8fa;border-radius:6px;padding:6px 10px;font-size:13px;font-weight:700;color:#b3ecff;margin-bottom:4px;">&#x2937; Si autre cas</div>
+          <div style="font-size:13px;color:rgba(255,255,255,0.85);padding:2px 8px 8px;">&#x2192; Recevoir une AuM</div>
+        </div>
+
+        <!-- Liste 3 actions finales -->
+        <ul class="pave-actions" style="margin-bottom:6px;">
+          <li>Appliquer <span class="fref">F 490</span></li>
+          <li>Redoubler d'attention dans l'observation des signaux</li>
+          <li>Surveiller le fonctionnement de la r&eacute;p&eacute;tition</li>
+        </ul>
+      </div>
+      <div style="margin:0 12px 12px;height:3px;background:rgba(30,111,168,0.25);border-left:4px solid #5ac8fa;border-right:1px solid rgba(90,200,250,0.12);border-radius:0 0 6px 6px;"></div>
+
+      <!-- ══ SITUATION 2 ══ -->
+      <div style="margin:4px 12px 0;padding:7px 12px;background:rgba(90,200,250,0.15);border-left:4px solid #5ac8fa;border-radius:8px 8px 0 0;">
+        <span style="font-family:var(--mono);font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#b3ecff;">&#x25CF; Autre situation &mdash; 1&egrave;re anomalie</span>
+      </div>
+      <div style="margin:0 12px 12px;background:rgba(90,200,250,0.04);border-left:4px solid #5ac8fa;border-right:1px solid rgba(90,200,250,0.12);border-bottom:1px solid rgba(90,200,250,0.12);border-radius:0 0 8px 8px;padding:6px 12px 8px;">
+        <ul class="pave-actions">
+          <li>Signaler l'anomalie &rarr; <span class="fref">F 300</span></li>
+          <li>Appliquer <span class="fref">F 490</span></li>
+          <li>Marcher &agrave; vue sur la DCO &agrave; partir du point d'arr&ecirc;t</li>
+          <li>Redoubler d'attention dans l'observation des signaux</li>
+          <li>Surveiller le fonctionnement de la r&eacute;p&eacute;tition</li>
+        </ul>
+      </div>
+
+      <!-- ══ 2ÈME ANOMALIE ══ -->
+      <div style="margin:4px 12px 0;padding:7px 12px;background:rgba(255,69,58,0.35);border-left:4px solid #ff453a;border-radius:8px 8px 0 0;">
+        <span style="font-family:var(--mono);font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#ffaaaa;">&#x25CF; 2&egrave;me anomalie</span>
+      </div>
+      <div style="margin:0 12px 12px;background:rgba(255,69,58,0.06);border-left:4px solid #ff453a;border-right:1px solid rgba(255,69,58,0.2);border-bottom:1px solid rgba(255,69,58,0.2);border-radius:0 0 8px 8px;padding:6px 12px 8px;">
+        <ul class="pave-actions">
+          <li>Appliquer les prescriptions de la 1&egrave;re anomalie</li>
+          <li>Consid&eacute;rer la r&eacute;p&eacute;tition en d&eacute;rangement</li>
+          <li>Ne plus tenir compte des nouvelles anomalies</li>
+          <li>Continuer d'agir sur BP(AC)SF</li>
+          <li>Appliquer <span class="fref">F 501</span></li>
+        </ul>
+      </div>
+
     </div>
   </div>
 
